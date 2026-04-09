@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "fetch-cms": "node scripts/fetch-cms.js",
+    "build": "npm run fetch-cms && next build",
     "start": "next start",
     "lint": "eslint"
   },
