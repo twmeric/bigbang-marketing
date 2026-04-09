@@ -4,9 +4,20 @@ import { GeistMono } from "geist/font/mono";
 import "./globals.css";
 import { CMSProvider } from "@/context/CMSContext";
 import AnalyticsTracker from "@/components/AnalyticsTracker";
+import cmsData from "@/data/cms.json";
+
+// 從 CMS 數據生成標題
+const hero = cmsData?.hero || {
+  titleLine1: "",
+  titleLine2: "Expand Your Universe"
+};
+
+const pageTitle = hero.titleLine1 
+  ? `Big Bang Marketing | ${hero.titleLine1}${hero.titleLine2 ? `. ${hero.titleLine2}` : ''}`
+  : `Big Bang Marketing | ${hero.titleLine2 || 'Expand Your Universe'}`;
 
 export const metadata: Metadata = {
-  title: "Big Bang Marketing | Ignite Your Brand. Expand Your Universe",
+  title: pageTitle,
   description: "Big Bang Marketing 是一間新創的全方位行銷公司，致力為客戶提供量身訂製的行銷解決方案。",
 };
 

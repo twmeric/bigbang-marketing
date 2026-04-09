@@ -2,13 +2,28 @@
 
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
+import { useCMS } from "@/context/CMSContext";
 
 export default function HeroSection() {
+  const { cmsData } = useCMS();
   const heroRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
   const descRef = useRef<HTMLParagraphElement>(null);
   const ctaRef = useRef<HTMLAnchorElement>(null);
+
+  // 從 CMS 獲取 Hero 數據
+  const hero = cmsData?.hero || {
+    enabled: true,
+    backgroundImage: "/hero-background.jpg",
+    titleLine1: "",
+    titleLine2: "Expand Your Universe",
+    titleLine2Color: "#facc15",
+    subtitle: "市場推廣及市場策劃",
+    description: "從策略到內容，一站式AI行銷及線下推廣服務，讓品牌脫穎而出。",
+    buttonText: "Contact Us",
+    buttonLink: "mailto:info@bigbangmarketing.hk"
+  };
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -42,6 +57,8 @@ export default function HeroSection() {
     return () => ctx.revert();
   }, []);
 
+  if (!hero.enabled) return null;
+
   return (
     <section
       ref={heroRef}
@@ -51,7 +68,7 @@ export default function HeroSection() {
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: `url('/hero-background.jpg')`,
+          backgroundImage: `url('${hero.backgroundImage}')`,
         }}
       />
       
@@ -62,33 +79,45 @@ export default function HeroSection() {
       <div className="relative z-10 container mx-auto px-4 text-center pt-20">
         <div ref={titleRef}>
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-2 tracking-tight">
-            <span className="block text-white">Ignite Your Brand.</span>
-            <span className="block text-yellow-400">Expand Your Universe</span>
+            {hero.titleLine1 && (
+              <span className="block text-white">{hero.titleLine1}</span>
+            )}
+            {hero.titleLine2 && (
+              <span className="block" style={{ color: hero.titleLine2Color || '#facc15' }}>
+                {hero.titleLine2}
+              </span>
+            )}
           </h1>
         </div>
 
-        <p
-          ref={subtitleRef}
-          className="text-xl md:text-2xl text-white font-medium mt-6 mb-4"
-        >
-          市場推廣及市場策劃
-        </p>
+        {hero.subtitle && (
+          <p
+            ref={subtitleRef}
+            className="text-xl md:text-2xl text-white font-medium mt-6 mb-4"
+          >
+            {hero.subtitle}
+          </p>
+        )}
 
-        <p 
-          ref={descRef}
-          className="text-base md:text-lg text-white/80 mb-10 max-w-2xl mx-auto leading-relaxed"
-        >
-          從策略到內容，一站式AI行銷及線下推廣服務，讓品牌脫穎而出。
-        </p>
+        {hero.description && (
+          <p 
+            ref={descRef}
+            className="text-base md:text-lg text-white/80 mb-10 max-w-2xl mx-auto leading-relaxed"
+          >
+            {hero.description}
+          </p>
+        )}
 
-        <a
-          ref={ctaRef}
-          href="mailto:info@bigbangmarketing.hk"
-          className="inline-flex items-center bg-yellow-400 hover:bg-yellow-500 text-gray-900 px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 hover:scale-105 shadow-lg"
-        >
-          <i className="fas fa-envelope mr-3"></i>
-          Contact Us
-        </a>
+        {hero.buttonText && hero.buttonLink && (
+          <a
+            ref={ctaRef}
+            href={hero.buttonLink}
+            className="inline-flex items-center bg-yellow-400 hover:bg-yellow-500 text-gray-900 px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 hover:scale-105 shadow-lg"
+          >
+            <i className="fas fa-envelope mr-3"></i>
+            {hero.buttonText}
+          </a>
+        )}
       </div>
 
       {/* Scroll indicator */}
