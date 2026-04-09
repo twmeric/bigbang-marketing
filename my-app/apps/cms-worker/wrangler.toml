@@ -1,0 +1,19 @@
+name = "bigbang-marketing-cms"
+main = "src/index.ts"
+compatibility_date = "2024-03-20"
+
+# KV Namespace
+[[kv_namespaces]]
+binding = "CMS_DATA"
+id = "df853dc4bbeb4d8cb53f66037f57309d"
+preview_id = "df853dc4bbeb4d8cb53f66037f57309d"
+
+# Environment Variables
+[vars]
+ADMIN_WHATSAPP = "85252768052"
+GITHUB_REPO = "jimsbond/bigbang-marketing"
+
+# Secrets (使用 wrangler secret put 设置)
+# GITHUB_TOKEN - GitHub Personal Access Token
+# CLOUDWAPI_API_KEY - CloudWapi WhatsApp API Key (可选)
+# CLOUDWAPI_SENDER - WhatsApp 发送方号码 (可选)

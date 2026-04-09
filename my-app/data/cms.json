@@ -1,0 +1,253 @@
+{
+  "site": {
+    "name": "Big Bang Marketing",
+    "title": "Big Bang Marketing | Ignite Your Brand. Expand Your Universe",
+    "description": "Big Bang Marketing 是一間新創的全方位行銷公司，致力為客戶提供量身訂製的行銷解決方案。",
+    "logo": "/logo.png",
+    "favicon": "/favicon.ico"
+  },
+  "navigation": {
+    "header": [
+      { "name": "主頁", "href": "/" },
+      { "name": "關於我們", "href": "#about" },
+      { "name": "服務", "href": "#services", "hasDropdown": true },
+      { "name": "成功案例", "href": "#cases" },
+      { "name": "聯絡我們", "href": "#contact" }
+    ],
+    "servicesDropdown": [
+      { "name": "SEO", "href": "/seo" },
+      { "name": "內容營銷", "href": "/content-marketing" },
+      { "name": "線下推廣", "href": "/offline-promotion" },
+      { "name": "KOL推廣", "href": "/kol-promotion" },
+      { "name": "網頁設計", "href": "/web-design" },
+      { "name": "包裝/poster設計", "href": "/packaging-design" }
+    ],
+    "social": [
+      { "icon": "fab fa-facebook-f", "href": "https://www.facebook.com/bigbangmarketing", "label": "Facebook" },
+      { "icon": "fab fa-instagram", "href": "https://www.instagram.com/bigbangmarketing.hk", "label": "Instagram" },
+      { "icon": "fab fa-whatsapp", "href": "https://wa.me/85252768052", "label": "WhatsApp" }
+    ]
+  },
+  "hero": {
+    "enabled": true,
+    "backgroundImage": "/hero-background.jpg",
+    "titleLine1": "Ignite Your Brand.",
+    "titleLine2": "Expand Your Universe",
+    "titleLine2Color": "#facc15",
+    "subtitle": "市場推廣及市場策劃",
+    "description": "從策略到內容，一站式AI行銷及線下推廣服務，讓品牌脫穎而出。",
+    "buttonText": "Contact Us",
+    "buttonIcon": "fa-envelope",
+    "buttonLink": "mailto:info@bigbangmarketing.hk",
+    "showScrollIndicator": true
+  },
+  "about": {
+    "enabled": true,
+    "tag": "最適合您的市場推廣公司",
+    "title": "關於我們",
+    "heading": "Big Bang Marketing 是一間新創的全方位行銷公司",
+    "description": "雲集來自不同領域的行銷專家，致力為客戶提供量身訂製的行銷解決方案。我們的服務涵蓋多個行業，包括美容、眼鏡、僱傭中介、教育、零售等，無論線上還是線下，我們都能協助企業拓展市場，提升品牌曝光，增加業績，並與世界接軌。",
+    "buttonText": "成為行業第一",
+    "features": [
+      { "icon": "fa-chart-line", "text": "最全面的成長營銷策略" },
+      { "icon": "fa-users", "text": "嵌入式營銷團隊，最理解您企業業務的營銷公司" },
+      { "icon": "fa-award", "text": "由多名具豐富營銷經驗的 Marketing專家主理" },
+      { "icon": "fa-gem", "text": "最全面、最有效、性價比最高的營銷方案" }
+    ]
+  },
+  "services": {
+    "enabled": true,
+    "tag": "我們的專業服務",
+    "title": "服務項目",
+    "description": "提供全方位的數碼營銷解決方案，協助您的品牌在競爭激烈的市場中脫穎而出",
+    "items": [
+      {
+        "icon": "fa-search",
+        "title": "SEO",
+        "subtitle": "搜尋引擎優化",
+        "description": "專業的SEO服務，助您的網站在Google搜尋結果中脫穎而出，提升自然流量。",
+        "href": "/seo"
+      },
+      {
+        "icon": "fa-pen-nib",
+        "title": "內容營銷",
+        "subtitle": "Content Marketing",
+        "description": "創作有價值的內容，吸引並留住您的目標受眾，建立品牌權威性。",
+        "href": "/content-marketing"
+      },
+      {
+        "icon": "fa-calendar-alt",
+        "title": "線下推廣",
+        "subtitle": "Offline Promotion",
+        "description": "創造難忘的線下體驗，讓品牌與客戶建立真實連結，提升品牌認知。",
+        "href": "/offline-promotion"
+      },
+      {
+        "icon": "fa-users",
+        "title": "KOL推廣",
+        "subtitle": "KOL Promotion",
+        "description": "連結合適的意見領袖，讓品牌聲音傳遍每個角落，擴大影響力。",
+        "href": "/kol-promotion"
+      },
+      {
+        "icon": "fa-laptop-code",
+        "title": "網頁設計",
+        "subtitle": "Web Design",
+        "description": "專業的網站設計與開發服務，打造具有吸引力且功能完善的網站。",
+        "href": "/web-design"
+      },
+      {
+        "icon": "fa-paint-brush",
+        "title": "包裝 / poster設計",
+        "subtitle": "Packaging Design",
+        "description": "讓產品在貨架上脫穎而出，創造難忘的開箱體驗，提升品牌價值。",
+        "href": "/packaging-design"
+      }
+    ]
+  },
+  "cases": {
+    "enabled": true,
+    "tag": "Our Work",
+    "title": "成功案例",
+    "description": "我們為各大品牌提供專業的營銷服務，創造卓越的市場成果",
+    "items": [
+      {
+        "id": 1,
+        "title": "Social feeds (Easy Earn)",
+        "client": "CVS",
+        "image": "/case-cvs.png",
+        "category": "社交媒體",
+        "description": "為 CVS 打造創意社交媒體內容，提升品牌曝光和用戶互動。"
+      },
+      {
+        "id": 2,
+        "title": "2023 ViuTV drama 殺手廢J - Title-Sponsorship SOW",
+        "client": "ViuTV",
+        "image": "/case-viutv.png",
+        "category": "品牌贊助",
+        "description": "為 ViuTV 人氣劇集提供冠名贊助整合營銷方案。"
+      },
+      {
+        "id": 3,
+        "title": "HSBC One - 2021 投資A0變世一 Social video (EP1-3)",
+        "client": "HSBC",
+        "image": "/case-hsbc.png",
+        "category": "影片製作",
+        "description": "為滙豐銀行製作投資教育系列社交影片，共3集。"
+      }
+    ]
+  },
+  "growth": {
+    "enabled": true,
+    "tag": "Growth Marketing",
+    "title": "什麼是成長營銷？",
+    "intro": "在 Big Bang Marketing，我們相信行銷不只是曝光與點擊，更是一場關於「增長」的實驗。",
+    "description": "Growth Marketing 成長營銷有別於傳統行銷模式 —— 我們不單追求短期的廣告成效，而是以企業的整體增長為核心，從潛在客戶開發到轉換與留存，構建出可持續的增長引擎。",
+    "buttonText": "成為行業第一",
+    "strategiesTitle": "我們怎樣推動增長？",
+    "strategiesSubtitle": "每個品牌都擁有獨特的DNA，Big Bang 會根據企業階段與市場環境，制定專屬的成長策略，並透過實驗與數據驗證持續優化：",
+    "strategies": [
+      {
+        "icon": "fa-search",
+        "title": "SEO & 內容行銷",
+        "description": "提升品牌搜尋能見度，讓你的內容在正確的時間出現在正確的人面前。"
+      },
+      {
+        "icon": "fa-hashtag",
+        "title": "社交媒體行銷",
+        "description": "結合創意與分析，放大品牌聲量，吸引高互動的潛在客戶。"
+      },
+      {
+        "icon": "fa-chart-pie",
+        "title": "轉換率優化（CRO）",
+        "description": "以數據為導向，持續測試與改良，將流量轉化為真實收益。"
+      },
+      {
+        "icon": "fa-robot",
+        "title": "行銷自動化與AI應用",
+        "description": "以智慧工具自動化流程，讓行銷更快、更準、更有效。"
+      }
+    ]
+  },
+  "faq": {
+    "enabled": true,
+    "tag": "FAQ",
+    "title": "成長營銷常見問題",
+    "description": "解答您對成長營銷最常見的疑問，讓您更了解如何運用數據驅動的營銷策略實現業務增長。",
+    "items": [
+      {
+        "question": "什麼是成長營銷 (Growth Marketing)？",
+        "answer": "成長營銷是一種以數據驅動的營銷方法，專注於企業的持續增長。與傳統營銷不同，成長營銷強調通過測試、優化和迭代來實現可持續的業務擴張。"
+      },
+      {
+        "question": "成長營銷與傳統營銷有什麼區別？",
+        "answer": "傳統營銷通常關注品牌知名度和一次性銷售，而成長營銷更注重長期價值、客戶留存和可持續增長。它使用數據分析來優化每個營銷渠道，並不斷測試新策略。"
+      },
+      {
+        "question": "Big Bang Marketing 如何幫助企業成長？",
+        "answer": "我們提供全方位的成長營銷服務，包括市場策劃、SEO優化、社交媒體營銷、內容營銷等。我們會根據您的業務特點制定個性化的成長策略，並持續監控和優化效果。"
+      },
+      {
+        "question": "成長營銷需要多長時間才能看到效果？",
+        "answer": "成長營銷的效果因行業和策略而異。一般來說，SEO優化可能需要3-6個月才能看到顯著效果，而社交媒體營銷和內容營銷可能會更快見效。我們會定期向您報告進展。"
+      },
+      {
+        "question": "我的企業適合成長營銷嗎？",
+        "answer": "幾乎所有企業都可以從成長營銷中受益，特別是那些希望實現可持續增長的企業。無論您是初創公司還是成熟企業，我們都能根據您的具體情況制定合適的策略。"
+      },
+      {
+        "question": "成長營銷的投資回報率如何？",
+        "answer": "根據我們的經驗，成長營銷的平均投資回報率可以達到3-7倍。通過精確的目標定位和持續優化，我們能夠最大化您的營銷投資效益。"
+      },
+      {
+        "question": "如何開始實施成長營銷策略？",
+        "answer": "首先需要進行市場分析和目標設定，然後制定詳細的營銷計劃。我們建議從一個核心渠道開始，逐步擴展到多渠道整合營銷。"
+      }
+    ],
+    "ctaTitle": "還有其他問題嗎？",
+    "ctaDescription": "我們的成長營銷專家隨時準備解答您的疑問，幫您制定最適合的營銷策略。",
+    "ctaButtonText": "聯絡我們"
+  },
+  "partners": {
+    "enabled": true,
+    "tag": "Our Partners",
+    "title": "服務合作夥伴",
+    "description": "我們與業界領先的技術平台合作，為您提供最優質的營銷服務",
+    "items": [
+      { "name": "Meta", "icon": "fa-facebook-f" },
+      { "name": "Google", "icon": "fa-google" },
+      { "name": "Instagram", "icon": "fa-instagram" },
+      { "name": "LinkedIn", "icon": "fa-linkedin-in" },
+      { "name": "YouTube", "icon": "fa-youtube" },
+      { "name": "TikTok", "icon": "fa-music" }
+    ]
+  },
+  "footer": {
+    "services": [
+      { "name": "網頁設計", "href": "/web-design" },
+      { "name": "社交媒體管理", "href": "#services" },
+      { "name": "數碼廣告", "href": "#services" },
+      { "name": "SEO優化", "href": "/seo" },
+      { "name": "內容營銷", "href": "/content-marketing" }
+    ],
+    "company": [
+      { "name": "關於我們", "href": "#about" },
+      { "name": "成功案例", "href": "#cases" },
+      { "name": "成長營銷", "href": "#growth" },
+      { "name": "常見問題", "href": "#faq" }
+    ],
+    "contact": {
+      "phone": "3987 1086",
+      "whatsapp": "5276 8052",
+      "email": "info@bigbangmarketing.hk",
+      "address": "Room 2301 B3-B4, 23/F, Nan Fung Centre, 264-298 Castle Peak Road, Tsuen Wan, N.T., Hong Kong",
+      "addressCn": "香港新界荃灣青山公路264-298號南豐中心23樓2301 B3-B4室"
+    },
+    "copyright": "© 2025 Big Bang Marketing. All rights reserved."
+  },
+  "meta": {
+    "version": "1.0.0",
+    "lastUpdated": "2025-03-27T10:00:00Z",
+    "author": "Big Bang Marketing"
+  }
+}

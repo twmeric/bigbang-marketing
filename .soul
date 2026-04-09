@@ -1,0 +1,13 @@
+SOULS MODE ACTIVATED
+===================
+Project: Big Bang Marketing CMS
+Activated: 2026-04-09 17:18:00+08:00
+Status: ACTIVE
+
+LESSONS LEARNED:
+- cms-data-synchronization: 表單必須正確顯示現有數據，使用深度合併
+- self-testing-workflow: 主動測試，不讓用戶發現問題
+
+COMMITMENT:
+每次修改後主動驗證，發現問題立即自我迭代修復。
+用戶不是測試員。

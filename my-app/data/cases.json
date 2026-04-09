@@ -1,0 +1,32 @@
+{
+  "cases": [
+    {
+      "id": 1,
+      "title": "Social feeds (Easy Earn)",
+      "client": "CVS",
+      "image": "/case-cvs.png",
+      "category": "社交媒體",
+      "description": "為 CVS 打造創意社交媒體內容，提升品牌曝光和用戶互動。"
+    },
+    {
+      "id": 2,
+      "title": "2023 ViuTV drama 殺手廢J - Title-Sponsorship SOW",
+      "client": "ViuTV",
+      "image": "/case-viutv.png",
+      "category": "品牌贊助",
+      "description": "為 ViuTV 人氣劇集提供冠名贊助整合營銷方案。"
+    },
+    {
+      "id": 3,
+      "title": "HSBC One - 2021 投資A0變世一 Social video (EP1-3)",
+      "client": "HSBC",
+      "image": "/case-hsbc.png",
+      "category": "影片製作",
+      "description": "為滙豐銀行製作投資教育系列社交影片，共3集。"
+    }
+  ],
+  "meta": {
+    "lastUpdated": "2026-03-27",
+    "version": "1.0"
+  }
+}

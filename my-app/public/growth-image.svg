@@ -1,0 +1,6 @@
+﻿<svg xmlns='http://www.w3.org/2000/svg' width='600' height='400' viewBox='0 0 600 400'>
+  <rect width='600' height='400' fill='#f3f4f6'/>
+  <path d='M100 300 L200 200 L300 250 L400 150 L500 100' stroke='#fbbf24' stroke-width='4' fill='none'/>
+  <circle cx='500' cy='100' r='10' fill='#fbbf24'/>
+  <text x='300' y='350' text-anchor='middle' fill='#1f2937' font-size='20' font-family='Arial'>Growth Strategy</text>
+</svg>
