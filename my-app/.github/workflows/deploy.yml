@@ -17,6 +17,9 @@ jobs:
   deploy-web:
     name: Deploy Web to Pages
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: my-app
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -25,10 +28,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
       - name: Build
         run: npm run build
@@ -36,16 +38,17 @@ jobs:
           NEXT_PUBLIC_CMS_API_URL: ${{ secrets.CMS_API_URL }}
 
       - name: Deploy to Cloudflare Pages
-        uses: cloudflare/pages-action@v1
-        with:
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: bigbang-marketing
-          directory: dist
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+        run: npx wrangler pages deploy dist --project-name=bigbang-marketing --branch=main
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
 
   deploy-worker:
     name: Deploy Worker
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: my-app/apps/cms-worker
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -54,15 +57,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci
-        working-directory: apps/cms-worker
+        run: npm install
 
       - name: Deploy Worker
         uses: cloudflare/wrangler-action@v3
         with:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          workingDirectory: apps/cms-worker
+          workingDirectory: my-app/apps/cms-worker
