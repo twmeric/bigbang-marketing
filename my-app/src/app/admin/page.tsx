@@ -19,7 +19,7 @@ export default function AdminDashboard() {
     const lastUpdated = safeLocalStorage.getItem("bigbang_last_updated");
     
     setStats({
-      totalCases: cmsData.cases?.items?.length || 0,
+      totalCases: (cmsData as any).cases?.items?.length || 0,
       totalMedia: savedMedia ? JSON.parse(savedMedia).length : 6,
       lastUpdated: lastUpdated ? new Date(lastUpdated).toLocaleString("zh-HK") : new Date().toLocaleString("zh-HK"),
     });

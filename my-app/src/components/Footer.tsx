@@ -98,7 +98,7 @@ export default function Footer() {
           <div>
             <h4 className="text-lg font-bold mb-6">服務</h4>
             <ul className="space-y-3">
-              {services.map((service, index) => (
+              {services.map((service: {name: string, href: string}, index: number) => (
                 <li key={index}>
                   <a
                     href={service.href}
@@ -115,7 +115,7 @@ export default function Footer() {
           <div>
             <h4 className="text-lg font-bold mb-6">公司</h4>
             <ul className="space-y-3">
-              {company.map((item, index) => (
+              {company.map((item: {name: string, href: string}, index: number) => (
                 <li key={index}>
                   <a
                     href={item.href}

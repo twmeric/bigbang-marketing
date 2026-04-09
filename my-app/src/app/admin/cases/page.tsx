@@ -23,9 +23,9 @@ export default function CasesPage() {
 
   // 從 CMS 數據加載案例
   useEffect(() => {
-    const cmsCases = cmsData.cases?.items || [];
+    const cmsCases = (cmsData as any).cases?.items || [];
     setCases(cmsCases);
-  }, [cmsData.cases]);
+  }, [cmsData]);
 
   const filteredCases = cases.filter((c) => {
     const matchesSearch = c.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -84,7 +84,7 @@ export default function CasesPage() {
   // 保存到 CMS
   const handleSaveToCMS = async () => {
     await updateSection("cases", { 
-      ...cmsData.cases,
+      ...(cmsData as any).cases,
       items: cases 
     });
     setHasChanges(false);

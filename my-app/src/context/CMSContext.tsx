@@ -10,12 +10,12 @@ import {
 } from "@/lib/api";
 
 interface CMSContextType {
-  cmsData: typeof defaultCMSData;
+  cmsData: any;
   isLoading: boolean;
   isSaving: boolean;
   isDeploying: boolean;
   error: string | null;
-  updateCMSData: (newData: Partial<typeof defaultCMSData>) => Promise<void>;
+  updateCMSData: (newData: any) => Promise<void>;
   updateSection: (section: string, data: any) => Promise<void>;
   resetToDefault: () => Promise<void>;
   deploy: () => Promise<void>;
@@ -27,7 +27,7 @@ interface CMSContextType {
 const CMSContext = createContext<CMSContextType | undefined>(undefined);
 
 export function CMSProvider({ children }: { children: ReactNode }) {
-  const [cmsData, setCmsData] = useState(defaultCMSData);
+  const [cmsData, setCmsData] = useState<any>(defaultCMSData);
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
   const [isDeploying, setIsDeploying] = useState(false);
@@ -82,10 +82,10 @@ export function CMSProvider({ children }: { children: ReactNode }) {
   };
 
   const updateSection = async (section: string, data: any) => {
-    const currentSection = cmsData[section as keyof typeof cmsData];
-    const updatedSection = { ...currentSection, ...data };
+    const currentSection = cmsData[section] || {};
+    const updatedSection = { ...(typeof currentSection === 'object' ? currentSection : {}), ...data };
     
-    await updateCMSData({ [section]: updatedSection } as any);
+    await updateCMSData({ [section]: updatedSection });
   };
 
   const resetToDefault = async () => {
