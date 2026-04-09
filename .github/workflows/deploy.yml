@@ -1,6 +1,7 @@
 name: Deploy to Cloudflare
 
 on:
+  # 手动触发
   workflow_dispatch:
     inputs:
       reason:
@@ -8,6 +9,7 @@ on:
         required: false
         default: 'Manual deployment'
   
+  # 推送到 main 分支时自动触发
   push:
     branches: [main]
 
@@ -25,7 +27,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
 
       - name: Install dependencies
         run: npm install
@@ -59,7 +61,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
 
       - name: Install dependencies
         run: npm install
