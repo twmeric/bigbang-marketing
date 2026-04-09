@@ -11,7 +11,7 @@ preview_id = "df853dc4bbeb4d8cb53f66037f57309d"
 # Environment Variables
 [vars]
 ADMIN_WHATSAPP = "85252768052"
-GITHUB_REPO = "jimsbond/bigbang-marketing"
+GITHUB_REPO = "twmeric/bigbang-marketing"
 
 # Secrets (使用 wrangler secret put 设置)
 # GITHUB_TOKEN - GitHub Personal Access Token

@@ -41,10 +41,29 @@ export async function resetCMSData() {
 }
 
 export async function deployWebsite(reason?: string) {
-  return apiRequest("/api/cms/deploy", {
+  const url = `${API_BASE_URL}/api/cms/deploy`;
+  
+  const response = await fetch(url, {
     method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify({ reason }),
   });
+  
+  // Handle 204 No Content (success)
+  if (response.status === 204) {
+    return { success: true, message: "Deployment triggered" };
+  }
+  
+  // Handle error responses
+  if (!response.ok) {
+    const error = await response.json().catch(() => ({}));
+    return { success: false, error: error.error || `API Error: ${response.status}` };
+  }
+  
+  // Handle JSON responses
+  return response.json();
 }
 
 // ===== Inquiry API =====

@@ -49,6 +49,13 @@ export default {
         case 'POST /api/cms/deploy':
           return await deployWebsite(request, env, corsHeaders);
         
+        case 'GET /api/cms/deploy-test':
+          return jsonResponse({
+            githubRepo: env.GITHUB_REPO,
+            tokenSet: !!env.GITHUB_TOKEN,
+            tokenPrefix: env.GITHUB_TOKEN ? env.GITHUB_TOKEN.substring(0, 4) + '****' : null,
+          }, 200, corsHeaders);
+        
         case 'POST /api/cms/reset':
           return await resetCMSData(env, corsHeaders);
         
