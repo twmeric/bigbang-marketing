@@ -1,0 +1,72 @@
+name: Deploy to Cloudflare
+
+on:
+  # 手动触发
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: 'Deployment reason'
+        required: false
+        default: 'Manual deployment'
+  
+  # 推送到 main 分支时自动触发
+  push:
+    branches: [main]
+
+jobs:
+  deploy-web:
+    name: Deploy Web to Pages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: my-app/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+        working-directory: my-app
+
+      - name: Build
+        run: npm run build
+        working-directory: my-app
+        env:
+          NEXT_PUBLIC_CMS_API_URL: ${{ secrets.CMS_API_URL }}
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/pages-action@v1
+        with:
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: bigbang-marketing
+          directory: my-app/dist
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+
+  deploy-worker:
+    name: Deploy Worker
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: my-app/apps/cms-worker/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+        working-directory: my-app/apps/cms-worker
+
+      - name: Deploy Worker
+        uses: cloudflare/wrangler-action@v3
+        with:
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          workingDirectory: my-app/apps/cms-worker
