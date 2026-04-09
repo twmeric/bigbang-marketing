@@ -35,14 +35,14 @@ jobs:
         env:
           NEXT_PUBLIC_CMS_API_URL: ${{ secrets.CMS_API_URL }}
 
+      - name: Install Wrangler
+        run: npm install -g wrangler
+
       - name: Deploy to Cloudflare Pages
-        uses: cloudflare/pages-action@v1
-        with:
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          projectName: bigbang-marketing
-          directory: dist
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+        run: wrangler pages deploy dist --project-name=bigbang-marketing --branch=main
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
 
   deploy-worker:
     name: Deploy Worker
