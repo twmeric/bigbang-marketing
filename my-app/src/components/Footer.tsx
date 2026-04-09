@@ -7,57 +7,51 @@ export default function Footer() {
   const { cmsData } = useCMS();
 
   // CMS 驅動的 Footer 數據
-  const footer = cmsData.footer || {
+  const footer = cmsData?.footer || {
     enabled: true,
-    contact: {
-      phone: "3987 1086",
-      whatsapp: "5276 8052",
-      email: "info@bigbangmarketing.hk",
-      address: "Room 2301 B3-B4, 23/F, Nan Fung Centre, Tsuen Wan, Hong Kong",
-      addressCn: "香港新界荃灣青山公路264-298號南豐中心23樓2301 B3-B4室"
-    },
+    companyName: "Big Bang Marketing",
+    companyDescription: "新創的全方位行銷公司，雲集來自不同領域的行銷專家，致力為客戶提供量身訂製的行銷解決方案。",
+    services: [
+      { name: "SEO優化", href: "/seo" },
+      { name: "內容營銷", href: "/content-marketing" },
+      { name: "網頁設計", href: "/web-design" },
+      { name: "KOL推廣", href: "/kol-promotion" },
+      { name: "線下推廣", href: "/offline-promotion" }
+    ],
+    company: [
+      { name: "關於我們", href: "#about" },
+      { name: "成功案例", href: "#cases" },
+      { name: "成長營銷", href: "#growth" },
+      { name: "常見問題", href: "#faq" }
+    ],
+    links: [
+      { name: "隱私政策", href: "/privacy" },
+      { name: "服務條款", href: "/terms" }
+    ],
     copyright: "© 2024 Big Bang Marketing. All rights reserved.",
     social: {
       facebook: "https://facebook.com/bigbangmarketing",
-      instagram: "https://instagram.com/bigbangmarketing"
+      instagram: "https://instagram.com/bigbangmarketing",
+      whatsapp: "https://wa.me/52768052"
     }
   };
 
-  // CMS 驅動的服務列表
-  const services = footer.services || [
-    { name: "SEO優化", href: "/seo" },
-    { name: "內容行銷", href: "/content-marketing" },
-    { name: "網頁設計", href: "/web-design" },
-    { name: "KOL推廣", href: "/kol-promotion" },
-    { name: "線下推廣", href: "/offline-promotion" },
-  ];
-
-  // CMS 驅動的公司連結
-  const company = footer.company || [
-    { name: "關於我們", href: "#about" },
-    { name: "成功案例", href: "#cases" },
-    { name: "成長營銷", href: "#growth" },
-    { name: "常見問題", href: "#faq" },
-  ];
-
-  // CMS 驅動的底部連結
-  const footerLinks = footer.links || [
-    { name: "隱私政策", href: "/privacy" },
-    { name: "服務條款", href: "/terms" },
-  ];
-
-  // CMS 驅動的社交連結
-  const socialLinks = footer.social ? [
-    { icon: "fab fa-facebook-f", href: footer.social.facebook, label: "Facebook" },
-    { icon: "fab fa-instagram", href: footer.social.instagram, label: "Instagram" },
-    { icon: "fab fa-whatsapp", href: `https://wa.me/${footer.contact?.whatsapp?.replace(/\s/g, '') || '85252768052'}`, label: "WhatsApp" },
-  ] : [
-    { icon: "fab fa-facebook-f", href: "https://www.facebook.com/bigbangmarketing", label: "Facebook" },
-    { icon: "fab fa-instagram", href: "https://www.instagram.com/bigbangmarketing.hk", label: "Instagram" },
-    { icon: "fab fa-whatsapp", href: "https://wa.me/85252768052", label: "WhatsApp" },
-  ];
+  // CMS 驅動的聯絡數據
+  const contact = cmsData?.contact || {
+    phoneNumber: "3987 1086",
+    whatsappNumber: "5276 8052",
+    emailAddress: "info@bigbangmarketing.hk",
+    address: "香港新界荃灣青山公路264-298號南豐中心23樓2301 B3-B4室"
+  };
 
   if (!footer.enabled) return null;
+
+  // 社交連結
+  const socialLinks = [
+    { icon: "fab fa-facebook-f", href: footer.social?.facebook || "https://facebook.com/bigbangmarketing", label: "Facebook" },
+    { icon: "fab fa-instagram", href: footer.social?.instagram || "https://instagram.com/bigbangmarketing", label: "Instagram" },
+    { icon: "fab fa-whatsapp", href: footer.social?.whatsapp || `https://wa.me/${contact.whatsappNumber?.replace(/\s/g, '') || '52768052'}`, label: "WhatsApp" },
+  ];
 
   return (
     <footer id="contact" className="bg-gray-900 text-white">
@@ -67,19 +61,19 @@ export default function Footer() {
           <div className="lg:col-span-1">
             <div className="mb-6">
               <Image
-                src={cmsData.site?.logo || "/logo.png"}
-                alt={cmsData.site?.name || "Big Bang Marketing"}
+                src="/logo.png"
+                alt={footer.companyName || "Big Bang Marketing"}
                 width={150}
                 height={50}
                 className="h-10 w-auto object-contain brightness-0 invert"
               />
             </div>
             <p className="text-gray-400 mb-6 leading-relaxed">
-              {cmsData.site?.description || "新創的全方位行銷公司，雲集來自不同領域的行銷專家，致力為客戶提供量身訂製的行銷解決方案。"}
+              {footer.companyDescription || "新創的全方位行銷公司，雲集來自不同領域的行銷專家，致力為客戶提供量身訂製的行銷解決方案。"}
             </p>
             {/* Social Links */}
             <div className="flex space-x-3">
-              {socialLinks.map((link, index) => (
+              {socialLinks.map((link: {icon: string, href: string, label: string}, index: number) => (
                 <a
                   key={index}
                   href={link.href}
@@ -98,7 +92,7 @@ export default function Footer() {
           <div>
             <h4 className="text-lg font-bold mb-6">服務</h4>
             <ul className="space-y-3">
-              {services.map((service: {name: string, href: string}, index: number) => (
+              {(footer.services || []).map((service: {name: string, href: string}, index: number) => (
                 <li key={index}>
                   <a
                     href={service.href}
@@ -115,7 +109,7 @@ export default function Footer() {
           <div>
             <h4 className="text-lg font-bold mb-6">公司</h4>
             <ul className="space-y-3">
-              {company.map((item: {name: string, href: string}, index: number) => (
+              {(footer.company || []).map((item: {name: string, href: string}, index: number) => (
                 <li key={index}>
                   <a
                     href={item.href}
@@ -135,41 +129,36 @@ export default function Footer() {
               <li className="flex items-center">
                 <i className="fas fa-phone text-yellow-400 mr-3 w-5"></i>
                 <a
-                  href={`tel:+852${footer.contact?.phone?.replace(/\s/g, '')}`}
+                  href={`tel:+852${contact.phoneNumber?.replace(/\s/g, '') || '39871086'}`}
                   className="text-gray-400 hover:text-yellow-400 transition-colors"
                 >
-                  {footer.contact?.phone || "3987 1086"}
+                  {contact.phoneNumber || "3987 1086"}
                 </a>
               </li>
               <li className="flex items-center">
                 <i className="fab fa-whatsapp text-yellow-400 mr-3 w-5"></i>
                 <a
-                  href={`https://wa.me/${footer.contact?.whatsapp?.replace(/\s/g, '') || '85252768052'}`}
+                  href={`https://wa.me/${contact.whatsappNumber?.replace(/\s/g, '') || '52768052'}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-400 hover:text-yellow-400 transition-colors"
                 >
-                  {footer.contact?.whatsapp || "5276 8052"}
+                  {contact.whatsappNumber || "5276 8052"}
                 </a>
               </li>
               <li className="flex items-center">
                 <i className="fas fa-envelope text-yellow-400 mr-3 w-5"></i>
                 <a
-                  href={`mailto:${footer.contact?.email}`}
+                  href={`mailto:${contact.emailAddress || "info@bigbangmarketing.hk"}`}
                   className="text-gray-400 hover:text-yellow-400 transition-colors"
                 >
-                  {footer.contact?.email || "info@bigbangmarketing.hk"}
+                  {contact.emailAddress || "info@bigbangmarketing.hk"}
                 </a>
               </li>
               <li className="flex items-start">
                 <i className="fas fa-map-marker-alt text-yellow-400 mt-1 mr-3 w-5"></i>
                 <span className="text-gray-400 text-sm">
-                  {footer.contact?.address?.split(',').map((part: string, i: number) => (
-                    <span key={i}>{part.trim()}<br /></span>
-                  ))}
-                  <span className="mt-1 block">
-                    {footer.contact?.addressCn || "香港新界荃灣青山公路264-298號南豐中心23樓2301 B3-B4室"}
-                  </span>
+                  {contact.address || "香港新界荃灣青山公路264-298號南豐中心23樓2301 B3-B4室"}
                 </span>
               </li>
             </ul>
@@ -183,7 +172,7 @@ export default function Footer() {
               {footer.copyright || "© 2024 Big Bang Marketing. All rights reserved."}
             </p>
             <div className="flex space-x-6 mt-4 md:mt-0">
-              {footerLinks.map((link: any, index: number) => (
+              {(footer.links || []).map((link: {name: string, href: string}, index: number) => (
                 <a 
                   key={index}
                   href={link.href} 

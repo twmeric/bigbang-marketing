@@ -2,7 +2,7 @@
   "hero": {
     "enabled": true,
     "backgroundImage": "/hero-background.jpg",
-    "titleLine1": "Ignite Your Brand",
+    "titleLine1": "",
     "titleLine2": "Expand Your Universe",
     "titleLine2Color": "#facc15",
     "subtitle": "市場推廣及市場策劃",
@@ -10,5 +10,5 @@
     "buttonText": "Contact Us",
     "buttonLink": "mailto:info@bigbangmarketing.hk"
   },
-  "lastUpdated": "2026-04-09T13:28:06.510Z"
+  "lastUpdated": "2026-04-09T14:32:38.178Z"
 }

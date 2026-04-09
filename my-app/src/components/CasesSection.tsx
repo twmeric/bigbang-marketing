@@ -4,12 +4,28 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
+import { useCMS } from "@/context/CMSContext";
 import casesData from "../../data/cases.json";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function CasesSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const { cmsData } = useCMS();
+
+  // Get cases section config from CMS with defaults
+  const cases = cmsData?.cases || {
+    enabled: true,
+    sectionTagline: "Our Work",
+    sectionTitle: "成功案例",
+    sectionDescription: "我們為各大品牌提供專業的營銷服務，創造卓越的市場成果",
+    clientLabel: "客戶：",
+    viewDetailsText: "查看詳情",
+    viewMoreText: "查看更多案例",
+  };
+
+  // Hide section if disabled
+  if (!cases.enabled) return null;
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -37,7 +53,7 @@ export default function CasesSection() {
     return () => ctx.revert();
   }, []);
 
-  const { cases } = casesData;
+  const { cases: caseItems } = casesData;
 
   return (
     <section
@@ -48,17 +64,17 @@ export default function CasesSection() {
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="text-center mb-16 animate-item">
-          <p className="text-yellow-400 font-semibold text-lg mb-3">Our Work</p>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">成功案例</h2>
+          <p className="text-yellow-400 font-semibold text-lg mb-3">{cases.sectionTagline}</p>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">{cases.sectionTitle}</h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            我們為各大品牌提供專業的營銷服務，創造卓越的市場成果
+            {cases.sectionDescription}
           </p>
           <div className="w-20 h-1 bg-yellow-400 mx-auto mt-6 rounded-full"></div>
         </div>
 
         {/* Cases Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {cases.map((caseItem, index) => (
+          {caseItems.map((caseItem: {id: number, title: string, client: string, category: string, description: string, image: string}) => (
             <div
               key={caseItem.id}
               className="animate-item group bg-gray-800 rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300 border border-gray-700 hover:border-yellow-400"
@@ -84,7 +100,7 @@ export default function CasesSection() {
               {/* Content */}
               <div className="p-6">
                 <p className="text-yellow-400 text-sm font-semibold mb-2">
-                  客戶：{caseItem.client}
+                  {cases.clientLabel}{caseItem.client}
                 </p>
                 <h3 className="text-xl font-bold mb-3 line-clamp-2">
                   {caseItem.title}
@@ -93,7 +109,7 @@ export default function CasesSection() {
                   {caseItem.description}
                 </p>
                 <button className="inline-flex items-center text-yellow-400 font-semibold hover:text-yellow-300 transition-colors">
-                  查看詳情
+                  {cases.viewDetailsText}
                   <i className="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
                 </button>
               </div>
@@ -109,7 +125,7 @@ export default function CasesSection() {
             rel="noopener noreferrer"
             className="inline-flex items-center bg-yellow-400 hover:bg-yellow-500 text-gray-900 px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 hover:scale-105"
           >
-            查看更多案例
+            {cases.viewMoreText}
             <i className="fas fa-arrow-right ml-2"></i>
           </a>
         </div>

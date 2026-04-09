@@ -2,8 +2,34 @@
 
 import { useState } from "react";
 import { submitInquiryWithWhatsAppFallback } from "@/lib/api";
+import { useCMS } from "@/context/CMSContext";
 
 export default function ContactForm() {
+  const { cmsData } = useCMS();
+  
+  // Get form data from CMS with default values
+  const form = cmsData?.contact?.form;
+  
+  const nameLabel = form?.nameLabel ?? "姓名 *";
+  const namePlaceholder = form?.namePlaceholder ?? "請輸入您的姓名";
+  const phoneLabel = form?.phoneLabel ?? "聯繫電話 *";
+  const phonePlaceholder = form?.phonePlaceholder ?? "例如: 9123 4567";
+  const emailLabel = form?.emailLabel ?? "電子郵箱";
+  const emailPlaceholder = form?.emailPlaceholder ?? "請輸入您的電郵地址";
+  const serviceLabel = form?.serviceLabel ?? "感興趣的服務";
+  const servicePlaceholder = form?.servicePlaceholder ?? "請選擇服務項目";
+  const serviceOptions = form?.serviceOptions ?? ["網站設計", "SEO優化", "內容營銷", "線下推廣", "KOL推廣", "包裝設計"];
+  const messageLabel = form?.messageLabel ?? "留言內容";
+  const messagePlaceholder = form?.messagePlaceholder ?? "請描述您的需求...";
+  const submitButton = form?.submitButton ?? "通過 WhatsApp 發送查詢";
+  const submittingText = form?.submittingText ?? "提交中...";
+  const successTitle = form?.successTitle ?? "提交成功！";
+  const successMessage = form?.successMessage ?? "我們已通過 WhatsApp 收到您的查詢，將盡快與您聯繫。";
+  const successButton = form?.successButton ?? "直接 WhatsApp 我們";
+  const footnote = form?.footnote ?? "點擊提交後將自動打開 WhatsApp，您的查詢信息將發送給我們的客服團隊";
+  const errorMessage = form?.errorMessage ?? "提交失敗";
+  const errorDetail = form?.errorDetail ?? "提交失敗，請直接通過 WhatsApp 聯繫我們: 5276 8052";
+
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -13,16 +39,6 @@ export default function ContactForm() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-
-  const services = [
-    { value: "", label: "請選擇服務項目" },
-    { value: "網站設計", label: "網站設計與開發" },
-    { value: "SEO優化", label: "SEO 搜尋引擎優化" },
-    { value: "內容營銷", label: "內容營銷策略" },
-    { value: "線下推廣", label: "線下推廣活動" },
-    { value: "KOL推廣", label: "KOL / 網紅推廣" },
-    { value: "包裝設計", label: "包裝設計" },
-  ];
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -47,8 +63,8 @@ export default function ContactForm() {
       setIsSubmitted(true);
       setFormData({ name: "", phone: "", email: "", service: "", message: "" });
     } catch (error) {
-      console.error("提交失敗:", error);
-      alert("提交失敗，請直接通過 WhatsApp 聯繫我們: 5276 8052");
+      console.error(`${errorMessage}:`, error);
+      alert(errorDetail);
     } finally {
       setIsSubmitting(false);
     }
@@ -60,9 +76,9 @@ export default function ContactForm() {
         <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
           <i className="fas fa-check text-white text-2xl"></i>
         </div>
-        <h3 className="text-xl font-bold text-gray-900 mb-2">提交成功！</h3>
+        <h3 className="text-xl font-bold text-gray-900 mb-2">{successTitle}</h3>
         <p className="text-gray-600 mb-4">
-          我們已通過 WhatsApp 收到您的查詢，將盡快與您聯繫。
+          {successMessage}
         </p>
         <a
           href="https://wa.me/85252768052"
@@ -71,7 +87,7 @@ export default function ContactForm() {
           className="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-xl font-medium transition-colors"
         >
           <i className="fab fa-whatsapp"></i>
-          <span>直接 WhatsApp 我們</span>
+          <span>{successButton}</span>
         </a>
       </div>
     );
@@ -82,7 +98,7 @@ export default function ContactForm() {
       {/* 姓名 */}
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-2">
-          姓名 <span className="text-red-500">*</span>
+          {nameLabel}
         </label>
         <input
           type="text"
@@ -90,7 +106,7 @@ export default function ContactForm() {
           value={formData.name}
           onChange={handleChange}
           required
-          placeholder="請輸入您的姓名"
+          placeholder={namePlaceholder}
           className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 transition-colors"
         />
       </div>
@@ -98,7 +114,7 @@ export default function ContactForm() {
       {/* 電話 */}
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-2">
-          聯繫電話 <span className="text-red-500">*</span>
+          {phoneLabel}
         </label>
         <input
           type="tel"
@@ -106,7 +122,7 @@ export default function ContactForm() {
           value={formData.phone}
           onChange={handleChange}
           required
-          placeholder="例如: 9123 4567"
+          placeholder={phonePlaceholder}
           className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 transition-colors"
         />
       </div>
@@ -114,14 +130,14 @@ export default function ContactForm() {
       {/* 電郵 */}
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-2">
-          電子郵箱
+          {emailLabel}
         </label>
         <input
           type="email"
           name="email"
           value={formData.email}
           onChange={handleChange}
-          placeholder="請輸入您的電郵地址"
+          placeholder={emailPlaceholder}
           className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 transition-colors"
         />
       </div>
@@ -129,7 +145,7 @@ export default function ContactForm() {
       {/* 服務項目 */}
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-2">
-          感興趣的服務
+          {serviceLabel}
         </label>
         <select
           name="service"
@@ -137,9 +153,10 @@ export default function ContactForm() {
           onChange={handleChange}
           className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 transition-colors bg-white"
         >
-          {services.map((s) => (
-            <option key={s.value} value={s.value}>
-              {s.label}
+          <option value="">{servicePlaceholder}</option>
+          {serviceOptions.map((option: string) => (
+            <option key={option} value={option}>
+              {option}
             </option>
           ))}
         </select>
@@ -148,14 +165,14 @@ export default function ContactForm() {
       {/* 留言 */}
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-2">
-          留言內容
+          {messageLabel}
         </label>
         <textarea
           name="message"
           value={formData.message}
           onChange={handleChange}
           rows={4}
-          placeholder="請描述您的需求..."
+          placeholder={messagePlaceholder}
           className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 transition-colors resize-none"
         />
       </div>
@@ -169,18 +186,18 @@ export default function ContactForm() {
         {isSubmitting ? (
           <>
             <i className="fas fa-spinner fa-spin"></i>
-            <span>提交中...</span>
+            <span>{submittingText}</span>
           </>
         ) : (
           <>
             <i className="fab fa-whatsapp"></i>
-            <span>通過 WhatsApp 發送查詢</span>
+            <span>{submitButton}</span>
           </>
         )}
       </button>
 
       <p className="text-xs text-gray-400 text-center">
-        點擊提交後將自動打開 WhatsApp，您的查詢信息將發送給我們的客服團隊
+        {footnote}
       </p>
     </form>
   );
