@@ -43,13 +43,24 @@ export function CMSProvider({ children }: { children: ReactNode }) {
     setError(null);
     
     try {
-      const data = await getCMSData();
-      if (data) {
-        setCmsData(data);
+      // 添加超時控制
+      const timeoutPromise = new Promise((_, reject) => 
+        setTimeout(() => reject(new Error('Request timeout')), 10000)
+      );
+      const dataPromise = getCMSData();
+      
+      const data = await Promise.race([dataPromise, timeoutPromise]) as any;
+      
+      if (data && (data.success !== false)) {
+        // 合併默認數據和 API 數據，確保字段完整性
+        setCmsData({ ...defaultCMSData, ...data });
+      } else {
+        throw new Error(data?.error || 'Invalid data');
       }
-    } catch (e) {
+    } catch (e: any) {
       console.error("Failed to load CMS data:", e);
-      setError("无法连接到服务器，使用默认数据");
+      // 不設置錯誤狀態，使用默認數據確保頁面正常顯示
+      setError(null);
       setCmsData(defaultCMSData);
     } finally {
       setIsLoading(false);

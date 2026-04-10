@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "fetch-cms": "node scripts/fetch-cms.js",
-    "build": "npm run fetch-cms && next build",
+    "check-env": "node scripts/check-env.js",
+    "build": "npm run check-env && npm run fetch-cms && next build",
     "start": "next start",
     "lint": "eslint",
     "audit-cms": "node scripts/audit-cms.js"

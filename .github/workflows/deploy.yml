@@ -36,6 +36,18 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Check Environment Variables
+        run: |
+          echo "🔍 Checking environment variables..."
+          if [ -z "${{ secrets.CMS_API_URL }}" ]; then
+            echo "❌ ERROR: CMS_API_URL secret is not set!"
+            echo "Please set CMS_API_URL in GitHub Secrets to: https://bigbang-marketing-cms.jimsbond007.workers.dev"
+            exit 1
+          else
+            echo "✅ CMS_API_URL is configured"
+            echo "API URL: ${{ secrets.CMS_API_URL }}"
+          fi
+
       - name: Build
         run: npm run build
         env:

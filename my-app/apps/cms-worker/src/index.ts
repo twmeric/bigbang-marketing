@@ -24,11 +24,25 @@ export default {
     const url = new URL(request.url);
     const path = url.pathname;
     const method = request.method;
+    const origin = request.headers.get('Origin') || '*';
+
+    // 允許的域名列表
+    const allowedOrigins = [
+      'https://bigbang.jkdcoding.com',
+      'https://bigbangmarketing.hk',
+      'https://www.bigbangmarketing.hk',
+      'https://bigbang-marketing-cms.jimsbond007.workers.dev',
+    ];
+    
+    // 動態允許 pages.dev 子域名
+    const isPagesDev = origin.match(/^https:\/\/[a-z0-9-]+\.bigbang-marketing\.pages\.dev$/);
+    const isAllowed = allowedOrigins.includes(origin) || isPagesDev || origin === '*';
 
     const corsHeaders = {
-      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Origin': isAllowed ? origin : allowedOrigins[0],
       'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
       'Access-Control-Allow-Headers': 'Content-Type, Authorization, Cache-Control, Pragma, *',
+      'Access-Control-Allow-Credentials': 'true',
       'Access-Control-Max-Age': '86400',
     };
 
