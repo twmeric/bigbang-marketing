@@ -99,6 +99,10 @@ export default function ContentPage() {
     { id: "services", label: "服務總覽", icon: "fa-list" },
     { id: "servicePages", label: "服務頁面", icon: "fa-file-alt" },
     { id: "cases", label: "成功案例", icon: "fa-image" },
+    { id: "growth", label: "成長營銷", icon: "fa-chart-line" },
+    { id: "faq", label: "常見問題", icon: "fa-question-circle" },
+    { id: "partners", label: "合作夥伴", icon: "fa-handshake" },
+    { id: "contact", label: "聯絡我們", icon: "fa-envelope" },
     { id: "footer", label: "頁腳", icon: "fa-shoe-prints" },
   ];
 
@@ -606,6 +610,133 @@ export default function ContentPage() {
                     <FormInput label="標籤" value={formData.cases?.tag || ""} onChange={(v: string) => updateFormSection("cases", { tag: v })} />
                     <FormInput label="標題" value={formData.cases?.title || ""} onChange={(v: string) => updateFormSection("cases", { title: v })} />
                     <FormTextarea label="描述" value={formData.cases?.description || ""} onChange={(v: string) => updateFormSection("cases", { description: v })} />
+                  </div>
+                )}
+              </SectionEditor>
+            )}
+
+            {/* Growth */}
+            {activeTab === "growth" && (
+              <SectionEditor title="成長營銷" onSave={() => saveSection("growth")}>
+                <FormCheckbox label="顯示此區域" checked={formData.growth?.enabled ?? true} onChange={(v: boolean) => updateFormSection("growth", { enabled: v })} />
+                {formData.growth?.enabled !== false && (
+                  <div className="space-y-6 mt-6">
+                    <FormInput label="標籤" value={formData.growth?.sectionTagline || ""} onChange={(v: string) => updateFormSection("growth", { sectionTagline: v })} />
+                    <FormInput label="標題" value={formData.growth?.sectionTitle || ""} onChange={(v: string) => updateFormSection("growth", { sectionTitle: v })} />
+                    <FormTextarea label="描述" value={formData.growth?.sectionDescription || ""} onChange={(v: string) => updateFormSection("growth", { sectionDescription: v })} />
+                    
+                    <div className="border-t pt-4">
+                      <label className="block text-sm font-medium text-gray-700 mb-3">策略項目</label>
+                      <div className="space-y-3">
+                        {(formData.growth?.strategies || []).map((strategy: any, index: number) => (
+                          <div key={index} className="p-3 bg-gray-50 rounded-lg">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                              <FormInput label="圖標" value={strategy.icon || ""} onChange={(v: string) => {
+                                const newStrategies = [...(formData.growth?.strategies || [])];
+                                newStrategies[index] = { ...strategy, icon: v };
+                                updateFormSection("growth", { strategies: newStrategies });
+                              }} />
+                              <FormInput label="標題" value={strategy.title || ""} onChange={(v: string) => {
+                                const newStrategies = [...(formData.growth?.strategies || [])];
+                                newStrategies[index] = { ...strategy, title: v };
+                                updateFormSection("growth", { strategies: newStrategies });
+                              }} />
+                            </div>
+                            <FormTextarea label="描述" value={strategy.description || ""} onChange={(v: string) => {
+                              const newStrategies = [...(formData.growth?.strategies || [])];
+                              newStrategies[index] = { ...strategy, description: v };
+                              updateFormSection("growth", { strategies: newStrategies });
+                            }} className="mt-2" />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </SectionEditor>
+            )}
+
+            {/* FAQ */}
+            {activeTab === "faq" && (
+              <SectionEditor title="常見問題" onSave={() => saveSection("faq")}>
+                <FormCheckbox label="顯示此區域" checked={formData.faq?.enabled ?? true} onChange={(v: boolean) => updateFormSection("faq", { enabled: v })} />
+                {formData.faq?.enabled !== false && (
+                  <div className="space-y-6 mt-6">
+                    <FormInput label="標籤" value={formData.faq?.sectionTagline || ""} onChange={(v: string) => updateFormSection("faq", { sectionTagline: v })} />
+                    <FormInput label="標題" value={formData.faq?.sectionTitle || ""} onChange={(v: string) => updateFormSection("faq", { sectionTitle: v })} />
+                    
+                    <div className="border-t pt-4">
+                      <label className="block text-sm font-medium text-gray-700 mb-3">FAQ 項目</label>
+                      <div className="space-y-3">
+                        {(formData.faq?.items || []).map((item: any, index: number) => (
+                          <div key={index} className="p-3 bg-gray-50 rounded-lg">
+                            <FormInput label="問題" value={item.question || ""} onChange={(v: string) => {
+                              const newItems = [...(formData.faq?.items || [])];
+                              newItems[index] = { ...item, question: v };
+                              updateFormSection("faq", { items: newItems });
+                            }} />
+                            <FormTextarea label="回答" value={item.answer || ""} onChange={(v: string) => {
+                              const newItems = [...(formData.faq?.items || [])];
+                              newItems[index] = { ...item, answer: v };
+                              updateFormSection("faq", { items: newItems });
+                            }} className="mt-2" />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </SectionEditor>
+            )}
+
+            {/* Partners */}
+            {activeTab === "partners" && (
+              <SectionEditor title="合作夥伴" onSave={() => saveSection("partners")}>
+                <FormCheckbox label="顯示此區域" checked={formData.partners?.enabled ?? true} onChange={(v: boolean) => updateFormSection("partners", { enabled: v })} />
+                {formData.partners?.enabled !== false && (
+                  <div className="space-y-6 mt-6">
+                    <FormInput label="標籤" value={formData.partners?.sectionTagline || ""} onChange={(v: string) => updateFormSection("partners", { sectionTagline: v })} />
+                    <FormInput label="標題" value={formData.partners?.sectionTitle || ""} onChange={(v: string) => updateFormSection("partners", { sectionTitle: v })} />
+                  </div>
+                )}
+              </SectionEditor>
+            )}
+
+            {/* Contact */}
+            {activeTab === "contact" && (
+              <SectionEditor title="聯絡我們" onSave={() => saveSection("contact")}>
+                <FormCheckbox label="顯示此區域" checked={formData.contact?.enabled ?? true} onChange={(v: boolean) => updateFormSection("contact", { enabled: v })} />
+                {formData.contact?.enabled !== false && (
+                  <div className="space-y-6 mt-6">
+                    <FormInput label="標籤" value={formData.contact?.sectionTagline || ""} onChange={(v: string) => updateFormSection("contact", { sectionTagline: v })} />
+                    <FormInput label="標題" value={formData.contact?.sectionTitle || ""} onChange={(v: string) => updateFormSection("contact", { sectionTitle: v })} />
+                    <FormTextarea label="描述" value={formData.contact?.sectionDescription || ""} onChange={(v: string) => updateFormSection("contact", { sectionDescription: v })} />
+                    
+                    <div className="border-t pt-4">
+                      <h4 className="font-medium text-gray-700 mb-3">聯絡信息</h4>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <FormInput label="電話標籤" value={formData.contact?.phoneLabel || ""} onChange={(v: string) => updateFormSection("contact", { phoneLabel: v })} />
+                        <FormInput label="電話號碼" value={formData.contact?.phoneNumber || ""} onChange={(v: string) => updateFormSection("contact", { phoneNumber: v })} />
+                        <FormInput label="WhatsApp 標籤" value={formData.contact?.whatsappLabel || ""} onChange={(v: string) => updateFormSection("contact", { whatsappLabel: v })} />
+                        <FormInput label="WhatsApp 號碼" value={formData.contact?.whatsappNumber || ""} onChange={(v: string) => updateFormSection("contact", { whatsappNumber: v })} />
+                        <FormInput label="Email 標籤" value={formData.contact?.emailLabel || ""} onChange={(v: string) => updateFormSection("contact", { emailLabel: v })} />
+                        <FormInput label="Email 地址" value={formData.contact?.emailAddress || ""} onChange={(v: string) => updateFormSection("contact", { emailAddress: v })} />
+                        <FormInput label="地址標籤" value={formData.contact?.addressLabel || ""} onChange={(v: string) => updateFormSection("contact", { addressLabel: v })} />
+                        <FormInput label="地址" value={formData.contact?.address || ""} onChange={(v: string) => updateFormSection("contact", { address: v })} />
+                      </div>
+                    </div>
+
+                    <div className="border-t pt-4">
+                      <h4 className="font-medium text-gray-700 mb-3">表單設置</h4>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <FormInput label="姓名標籤" value={formData.contact?.form?.nameLabel || ""} onChange={(v: string) => updateFormSection("contact", { form: { ...formData.contact?.form, nameLabel: v } })} />
+                        <FormInput label="姓名提示" value={formData.contact?.form?.namePlaceholder || ""} onChange={(v: string) => updateFormSection("contact", { form: { ...formData.contact?.form, namePlaceholder: v } })} />
+                        <FormInput label="電話標籤" value={formData.contact?.form?.phoneLabel || ""} onChange={(v: string) => updateFormSection("contact", { form: { ...formData.contact?.form, phoneLabel: v } })} />
+                        <FormInput label="電話提示" value={formData.contact?.form?.phonePlaceholder || ""} onChange={(v: string) => updateFormSection("contact", { form: { ...formData.contact?.form, phonePlaceholder: v } })} />
+                        <FormInput label="提交按鈕" value={formData.contact?.form?.submitButton || ""} onChange={(v: string) => updateFormSection("contact", { form: { ...formData.contact?.form, submitButton: v } })} />
+                        <FormInput label="成功標題" value={formData.contact?.form?.successTitle || ""} onChange={(v: string) => updateFormSection("contact", { form: { ...formData.contact?.form, successTitle: v } })} />
+                      </div>
+                    </div>
                   </div>
                 )}
               </SectionEditor>

@@ -180,7 +180,7 @@ export default function ServicePageTemplate({ pageKey }: ServicePageTemplateProp
                 {features?.title || "服務項目"}
               </h2>
               <p className="text-gray-600 text-center max-w-2xl mx-auto mb-12">
-                我們提供專業的服務，幫助您的品牌成長
+                {features?.description || "我們提供專業的服務，幫助您的品牌成長"}
               </p>
               
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
@@ -232,7 +232,7 @@ export default function ServicePageTemplate({ pageKey }: ServicePageTemplateProp
                 {techStack?.title || "採用最新的技術"}
               </h2>
               <p className="text-gray-600 max-w-2xl mx-auto mb-12">
-                我們採用最新的前端技術和設計工具，確保您的網站具有現代感和優良性能
+                {techStack?.description || "我們採用最新的前端技術和設計工具，確保您的網站具有現代感和優良性能"}
               </p>
               
               <div className="flex flex-wrap justify-center gap-4 max-w-4xl mx-auto">
