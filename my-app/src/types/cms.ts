@@ -171,7 +171,7 @@ export interface ServicePageData {
     description?: string;
     items: { icon: string; title: string; description: string }[];
   };
-  process: {
+  process?: {
     title: string;
     steps: { number: string; title: string; description: string }[];
   };

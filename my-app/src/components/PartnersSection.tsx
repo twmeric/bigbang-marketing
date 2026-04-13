@@ -76,13 +76,19 @@ export default function PartnersSection() {
 
         {/* Partners Grid */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 animate-item">
-          {partners.items.map((partner: {name: string, icon: string}, index: number) => (
+          {partners.items.map((partner: {name: string, icon?: string, logo?: string}, index: number) => (
             <div
               key={index}
               className="flex flex-col items-center p-6 bg-gray-50 rounded-xl border border-gray-100 hover:border-yellow-400 transition-all duration-300"
             >
-              <div className="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mb-4">
-                <i className={`fab ${partner.icon.startsWith('fa-') ? partner.icon : 'fa-' + partner.icon} text-gray-600 text-2xl`}></i>
+              <div className="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mb-4 overflow-hidden">
+                {partner.logo ? (
+                  <img src={partner.logo} alt={partner.name} className="w-full h-full object-cover" />
+                ) : partner.icon ? (
+                  <i className={`fab ${partner.icon.startsWith('fa-') ? partner.icon : 'fa-' + partner.icon} text-gray-600 text-2xl`}></i>
+                ) : (
+                  <span className="text-gray-400 text-xs">{partner.name.charAt(0)}</span>
+                )}
               </div>
               <span className="text-gray-700 font-semibold text-sm">{partner.name}</span>
             </div>

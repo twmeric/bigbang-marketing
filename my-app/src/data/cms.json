@@ -23,10 +23,22 @@
     "mainHeading": "Big Bang Marketing 是一間新創的全方位行銷公司",
     "description": "雲集來自不同領域的行銷專家，致力為客戶提供量身訂製的行銷解決方案。我們深信每個品牌都有獨特的故事，而我們的使命就是幫助您將這個故事傳達給世界。",
     "features": [
-      { "icon": "chart-line", "text": "最全面的成長營銷策略" },
-      { "icon": "users", "text": "嵌入式營銷團隊，緊貼市場脈搏" },
-      { "icon": "award", "text": "由多名具豐富營銷經驗的 Marketing 專家主理" },
-      { "icon": "gem", "text": "最全面、最有效、性價比最高的營銷方案" }
+      {
+        "icon": "chart-line",
+        "text": "最全面的成長營銷策略"
+      },
+      {
+        "icon": "users",
+        "text": "嵌入式營銷團隊，緊貼市場脈搏"
+      },
+      {
+        "icon": "award",
+        "text": "由多名具豐富營銷經驗的 Marketing 專家主理"
+      },
+      {
+        "icon": "gem",
+        "text": "最全面、最有效、性價比最高的營銷方案"
+      }
     ],
     "ctaText": "成為行業第一",
     "ctaLink": "https://wa.me/85252768052"
@@ -37,12 +49,48 @@
     "sectionTitle": "專業營銷服務",
     "sectionDescription": "提供全方位的數碼營銷解決方案，助您的品牌在市場中脫穎而出",
     "items": [
-      { "id": "seo", "icon": "fa-search", "title": "SEO 優化", "description": "提升網站在搜索引擎的排名，增加自然流量", "link": "/seo" },
-      { "id": "content", "icon": "fa-pen-nib", "title": "內容營銷", "description": "創作優質內容，建立品牌權威性和信任度", "link": "/content-marketing" },
-      { "id": "offline", "icon": "fa-bullhorn", "title": "線下推廣", "description": "實體活動和傳統媒體推廣，擴大品牌影響力", "link": "/offline-promotion" },
-      { "id": "kol", "icon": "fa-users", "title": "KOL 推廣", "description": "與關鍵意見領袖合作，精準觸達目標受眾", "link": "/kol-promotion" },
-      { "id": "web", "icon": "fa-laptop-code", "title": "網頁設計", "description": "設計現代化、響應式網站，提升用戶體驗", "link": "/web-design" },
-      { "id": "packaging", "icon": "fa-box", "title": "包裝/Poster 設計", "description": "創意包裝和平面設計，讓產品更具吸引力", "link": "/packaging-design" }
+      {
+        "id": "seo",
+        "icon": "fa-search",
+        "title": "SEO 優化",
+        "description": "提升網站在搜索引擎的排名，增加自然流量",
+        "link": "/seo"
+      },
+      {
+        "id": "content",
+        "icon": "fa-pen-nib",
+        "title": "內容營銷",
+        "description": "創作優質內容，建立品牌權威性和信任度",
+        "link": "/content-marketing"
+      },
+      {
+        "id": "offline",
+        "icon": "fa-bullhorn",
+        "title": "線下推廣",
+        "description": "實體活動和傳統媒體推廣，擴大品牌影響力",
+        "link": "/offline-promotion"
+      },
+      {
+        "id": "kol",
+        "icon": "fa-users",
+        "title": "KOL 推廣",
+        "description": "與關鍵意見領袖合作，精準觸達目標受眾",
+        "link": "/kol-promotion"
+      },
+      {
+        "id": "web",
+        "icon": "fa-laptop-code",
+        "title": "網頁設計",
+        "description": "設計現代化、響應式網站，提升用戶體驗",
+        "link": "/web-design"
+      },
+      {
+        "id": "packaging",
+        "icon": "fa-box",
+        "title": "包裝/Poster 設計",
+        "description": "創意包裝和平面設計，讓產品更具吸引力",
+        "link": "/packaging-design"
+      }
     ]
   },
   "cases": {
@@ -53,27 +101,51 @@
     "items": [
       {
         "id": "case1",
-        "client": "美食品牌",
-        "title": "消費券推廣活動",
-        "description": "為連鎖餐飲品牌策劃消費券推廣活動，提升門店客流量",
-        "image": "/images/case1.jpg",
+        "client": "消費券合作計劃",
+        "title": "美食變變賞",
+        "description": "創意消費券推廣活動，設計「美食變變賞」主題，透過互動遊戲和優惠券派發，成功提升參與度和門店客流量。",
+        "image": "/images/cases/food-reward.jpg",
         "category": "線下推廣"
       },
       {
         "id": "case2",
         "client": "Häagen-Dazs",
         "title": "雪糕系列營銷",
-        "description": "與殺手廚J合作，打造創意雪糕料理內容營銷",
-        "image": "/images/case2.jpg",
+        "description": "與知名YouTuber殺手廚J合作，打造創意雪糕料理內容營銷，推出「勇者無制限」系列，展示雪糕的多樣化食法。",
+        "image": "/images/cases/haagen-dazs.jpg",
         "category": "內容營銷"
       },
       {
         "id": "case3",
         "client": "滙豐銀行",
         "title": "投資世一大作戰",
-        "description": "策劃線下活動和社交媒體推廣，提升品牌年輕化形象",
-        "image": "/images/case3.jpg",
+        "description": "策劃大型線下活動和社交媒體整合推廣，以「投資世一」為主題，成功提升品牌在年輕族群中的形象和認知度。",
+        "image": "/images/cases/hsbc-campaign.jpg",
         "category": "整合營銷"
+      },
+      {
+        "id": "case4",
+        "client": "消費券百賞袋",
+        "title": "賞到拿來望遠鏡",
+        "description": "創意App推廣活動，設計「一App賺通勝途，獎賞手到拿來」主題，結合數碼工具和實體獎賞，提升用戶參與度。",
+        "image": "/images/cases/app-campaign.jpg",
+        "category": "線下推廣"
+      },
+      {
+        "id": "case5",
+        "client": "消費券百賞袋",
+        "title": "自動提貨機",
+        "description": "創新零售體驗推廣，設置自動提貨機「一嘟自動攞齊，現金券即到手」，簡化領獎流程並提升品牌體驗。",
+        "image": "/images/cases/vending-machine.jpg",
+        "category": "線下推廣"
+      },
+      {
+        "id": "case6",
+        "client": "消費券百賞袋",
+        "title": "賞遍天下機",
+        "description": "戶外大型推廣裝置，「周圍賞周圍轉，一部手機搞掂晒」，創意互動裝置吸引大量人流打卡參與。",
+        "image": "/images/cases/outdoor-campaign.jpg",
+        "category": "線下推廣"
       }
     ]
   },
@@ -83,9 +155,21 @@
     "sectionTitle": "數據驅動的成長策略",
     "sectionDescription": "運用數據分析和創新策略，實現可持續的業務增長",
     "strategies": [
-      { "icon": "fa-chart-line", "title": "數據分析", "description": "深入分析市場趨勢和用戶行為" },
-      { "icon": "fa-bullseye", "title": "精準定位", "description": "準確鎖定目標客戶群體" },
-      { "icon": "fa-rocket", "title": "快速迭代", "description": "持續優化營銷策略和執行" }
+      {
+        "icon": "fa-chart-line",
+        "title": "數據分析",
+        "description": "深入分析市場趨勢和用戶行為，制定精準策略"
+      },
+      {
+        "icon": "fa-bullseye",
+        "title": "精準定位",
+        "description": "準確鎖定目標客戶群體，提高轉換率"
+      },
+      {
+        "icon": "fa-rocket",
+        "title": "快速迭代",
+        "description": "持續優化營銷策略和執行，追求最佳效果"
+      }
     ]
   },
   "faq": {
@@ -93,10 +177,22 @@
     "sectionTagline": "常見問題",
     "sectionTitle": "您可能想問",
     "items": [
-      { "question": "Big Bang Marketing 提供什麼服務？", "answer": "我們提供全方位的營銷服務，包括 SEO 優化、內容營銷、線下推廣、KOL 合作、網頁設計和包裝設計等。" },
-      { "question": "如何開始與你們合作？", "answer": "您可以通過網站表單、WhatsApp 或電郵與我們聯繫。我們會安排免費諮詢，了解您的需求後提供定制方案。" },
-      { "question": "服務收費是多少？", "answer": "我們的收費根據項目需求和範圍而定。歡迎聯繫我們獲取詳細報價。" },
-      { "question": "項目通常需要多長時間？", "answer": "項目時間視乎複雜程度而定。一般網站設計需 2-4 週，整合營銷項目可能需要 1-3 個月。" }
+      {
+        "question": "Big Bang Marketing 提供什麼服務？",
+        "answer": "我們提供全方位的營銷服務，包括 SEO 優化、內容營銷、線下推廣、KOL 合作、網頁設計和包裝設計等。從策略制定到執行落地，一站式滿足您的營銷需求。"
+      },
+      {
+        "question": "如何開始與你們合作？",
+        "answer": "您可以通過網站表單、WhatsApp 或電郵與我們聯繫。我們會安排免費諮詢，了解您的需求後提供定制方案。"
+      },
+      {
+        "question": "服務收費是多少？",
+        "answer": "我們的收費根據項目需求和範圍而定。我們致力提供性價比最高的營銷方案，歡迎聯繫我們獲取詳細報價。"
+      },
+      {
+        "question": "項目通常需要多長時間？",
+        "answer": "項目時間視乎複雜程度而定。一般網站設計需 2-4 週，整合營銷項目可能需要 1-3 個月。我們會在項目開始前提供詳細時間表。"
+      }
     ]
   },
   "partners": {
@@ -104,9 +200,18 @@
     "sectionTagline": "合作夥伴",
     "sectionTitle": "信賴我們的客戶",
     "items": [
-      { "name": "Client 1", "logo": "/images/partner1.png" },
-      { "name": "Client 2", "logo": "/images/partner2.png" },
-      { "name": "Client 3", "logo": "/images/partner3.png" }
+      {
+        "name": "Häagen-Dazs",
+        "logo": "/images/partners/haagen-dazs.png"
+      },
+      {
+        "name": "滙豐銀行",
+        "logo": "/images/partners/hsbc.png"
+      },
+      {
+        "name": "消費券百賞袋",
+        "logo": "/images/partners/voucher.png"
+      }
     ]
   },
   "contact": {
@@ -131,7 +236,14 @@
       "emailPlaceholder": "請輸入您的電郵地址",
       "serviceLabel": "感興趣的服務",
       "servicePlaceholder": "請選擇服務項目",
-      "serviceOptions": ["網站設計", "SEO優化", "內容營銷", "線下推廣", "KOL推廣", "包裝設計"],
+      "serviceOptions": [
+        "網站設計",
+        "SEO優化",
+        "內容營銷",
+        "線下推廣",
+        "KOL推廣",
+        "包裝設計"
+      ],
       "messageLabel": "留言內容",
       "messagePlaceholder": "請描述您的需求...",
       "submitButton": "通過 WhatsApp 發送查詢",
@@ -149,21 +261,54 @@
     "companyName": "Big Bang Marketing",
     "companyDescription": "新創的全方位行銷公司，雲集來自不同領域的行銷專家，致力為客戶提供量身訂製的行銷解決方案。",
     "services": [
-      { "name": "SEO優化", "href": "/seo" },
-      { "name": "內容營銷", "href": "/content-marketing" },
-      { "name": "網頁設計", "href": "/web-design" },
-      { "name": "KOL推廣", "href": "/kol-promotion" },
-      { "name": "線下推廣", "href": "/offline-promotion" }
+      {
+        "name": "SEO優化",
+        "href": "/seo"
+      },
+      {
+        "name": "內容營銷",
+        "href": "/content-marketing"
+      },
+      {
+        "name": "網頁設計",
+        "href": "/web-design"
+      },
+      {
+        "name": "KOL推廣",
+        "href": "/kol-promotion"
+      },
+      {
+        "name": "線下推廣",
+        "href": "/offline-promotion"
+      }
     ],
     "company": [
-      { "name": "關於我們", "href": "#about" },
-      { "name": "成功案例", "href": "#cases" },
-      { "name": "成長營銷", "href": "#growth" },
-      { "name": "常見問題", "href": "#faq" }
+      {
+        "name": "關於我們",
+        "href": "#about"
+      },
+      {
+        "name": "成功案例",
+        "href": "#cases"
+      },
+      {
+        "name": "成長營銷",
+        "href": "#growth"
+      },
+      {
+        "name": "常見問題",
+        "href": "#faq"
+      }
     ],
     "links": [
-      { "name": "隱私政策", "href": "/privacy" },
-      { "name": "服務條款", "href": "/terms" }
+      {
+        "name": "隱私政策",
+        "href": "/privacy"
+      },
+      {
+        "name": "服務條款",
+        "href": "/terms"
+      }
     ],
     "copyright": "© 2024 Big Bang Marketing. All rights reserved.",
     "social": {
@@ -174,27 +319,561 @@
   },
   "navigation": {
     "items": [
-      { "name": "主頁", "href": "/" },
-      { "name": "關於我們", "href": "#about" },
+      {
+        "name": "主頁",
+        "href": "/"
+      },
+      {
+        "name": "關於我們",
+        "href": "#about"
+      },
       {
         "name": "服務",
         "href": "#services",
         "children": [
-          { "name": "SEO優化", "href": "/seo" },
-          { "name": "內容營銷", "href": "/content-marketing" },
-          { "name": "線下推廣", "href": "/offline-promotion" },
-          { "name": "KOL推廣", "href": "/kol-promotion" },
-          { "name": "網頁設計", "href": "/web-design" },
-          { "name": "包裝設計", "href": "/packaging-design" }
+          {
+            "name": "SEO優化",
+            "href": "/seo"
+          },
+          {
+            "name": "內容營銷",
+            "href": "/content-marketing"
+          },
+          {
+            "name": "線下推廣",
+            "href": "/offline-promotion"
+          },
+          {
+            "name": "KOL推廣",
+            "href": "/kol-promotion"
+          },
+          {
+            "name": "網頁設計",
+            "href": "/web-design"
+          },
+          {
+            "name": "包裝設計",
+            "href": "/packaging-design"
+          }
         ]
       },
-      { "name": "成功案例", "href": "#cases" },
-      { "name": "聯絡我們", "href": "#contact" }
+      {
+        "name": "成功案例",
+        "href": "#cases"
+      },
+      {
+        "name": "聯絡我們",
+        "href": "#contact"
+      }
     ],
     "ctaButton": {
       "text": "成為行業第一",
       "href": "mailto:info@bigbangmarketing.hk"
     }
   },
-  "lastUpdated": "2026-04-13T12:00:00.000Z"
+  "servicePages": {
+    "seo": {
+      "enabled": true,
+      "pageTitle": "SEO 優化服務 | Big Bang Marketing",
+      "pageDescription": "專業 SEO 優化服務，提升網站排名和自然流量",
+      "hero": {
+        "title": "SEO 優化服務",
+        "subtitle": "Search Engine Optimization",
+        "description": "透過專業的 SEO 策略，提升您的網站在 Google 等搜索引擎的排名，吸引更多自然流量，讓潛在客戶更容易找到您。",
+        "backgroundImage": "/images/seo-hero.jpg",
+        "buttonText": "免費諮詢",
+        "buttonLink": "#contact"
+      },
+      "features": {
+        "title": "我們的 SEO 服務特色",
+        "description": "全方位的搜尋引擎優化方案",
+        "items": [
+          {
+            "icon": "fa-search",
+            "title": "關鍵字研究",
+            "description": "深入分析行業關鍵字，找出最具價值的目標關鍵字"
+          },
+          {
+            "icon": "fa-code",
+            "title": "技術 SEO",
+            "description": "優化網站架構和代碼，提升搜索引擎抓取效率"
+          },
+          {
+            "icon": "fa-file-alt",
+            "title": "內容優化",
+            "description": "創作優質 SEO 內容，提升網站權威性"
+          },
+          {
+            "icon": "fa-link",
+            "title": "外鏈建設",
+            "description": "建立高質量外鏈，提升網站權重"
+          }
+        ]
+      },
+      "stats": {
+        "enabled": true,
+        "items": [
+          {
+            "value": "300%",
+            "label": "平均流量提升",
+            "description": "客戶網站自然流量平均增長"
+          },
+          {
+            "value": "50+",
+            "label": "成功案例",
+            "description": "協助超過50個品牌提升排名"
+          },
+          {
+            "value": "第一頁",
+            "label": "關鍵字排名",
+            "description": "80%目標關鍵字登上首頁"
+          }
+        ]
+      },
+      "testimonial": {
+        "enabled": true,
+        "quote": "Big Bang Marketing 的 SEO 服務讓我們的網站流量在3個月內提升了400%，業績也隨之翻倍。",
+        "author": "陳先生",
+        "role": "電商品牌總監",
+        "avatar": "/images/testimonial-1.jpg"
+      },
+      "process": {
+        "title": "我們的 SEO 流程",
+        "steps": [
+          {
+            "number": "01",
+            "title": "網站審核",
+            "description": "全面分析網站現狀和競爭對手"
+          },
+          {
+            "number": "02",
+            "title": "策略制定",
+            "description": "制定客製化 SEO 策略和關鍵字規劃"
+          },
+          {
+            "number": "03",
+            "title": "執行優化",
+            "description": "技術優化、內容創建和外鏈建設"
+          },
+          {
+            "number": "04",
+            "title": "監測報告",
+            "description": "定期追蹤成效並調整策略"
+          }
+        ]
+      },
+      "cta": {
+        "title": "準備好提升您的搜尋排名了嗎？",
+        "description": "立即聯繫我們，獲取免費的 SEO 諮詢服務。",
+        "buttonText": "立即開始",
+        "buttonLink": "#contact"
+      },
+      "faq": {
+        "enabled": true,
+        "title": "SEO 常見問題",
+        "items": [
+          {
+            "question": "SEO 需要多久才能看到效果？",
+            "answer": "一般情況下，SEO 需要 3-6 個月才能看到明顯效果。這取決於行業競爭程度、網站現狀等因素。"
+          },
+          {
+            "question": "SEO 和 SEM 有什麼分別？",
+            "answer": "SEO 是自然搜尋排名優化，不需要付費；SEM 是搜尋引擎營銷，通常指付費廣告如 Google Ads。"
+          }
+        ]
+      }
+    },
+    "contentMarketing": {
+      "enabled": true,
+      "pageTitle": "內容營銷服務 | Big Bang Marketing",
+      "pageDescription": "專業內容營銷服務，建立品牌權威性",
+      "hero": {
+        "title": "內容營銷服務",
+        "subtitle": "Content Marketing",
+        "description": "創作優質內容，建立品牌權威性和信任度，與目標受眾建立深度連結，讓您的品牌故事被更多人看見。",
+        "backgroundImage": "/images/content-hero.jpg",
+        "buttonText": "免費諮詢",
+        "buttonLink": "#contact"
+      },
+      "features": {
+        "title": "我們的內容營銷特色",
+        "description": "用內容打動人心，建立品牌影響力",
+        "items": [
+          {
+            "icon": "fa-pen",
+            "title": "品牌故事",
+            "description": "挖掘品牌獨特價值，創作打動人心的故事"
+          },
+          {
+            "icon": "fa-video",
+            "title": "影片內容",
+            "description": "製作高質量影片，提升品牌形象"
+          },
+          {
+            "icon": "fa-share-alt",
+            "title": "社群內容",
+            "description": "為不同平台量身打造內容策略"
+          },
+          {
+            "icon": "fa-blog",
+            "title": "部落格文章",
+            "description": "撰寫專業文章，建立行業權威"
+          }
+        ]
+      },
+      "stats": {
+        "enabled": true,
+        "items": [
+          {
+            "value": "10x",
+            "label": "互動率提升",
+            "description": "優質內容帶來的互動增長"
+          },
+          {
+            "value": "100+",
+            "label": "內容作品",
+            "description": "為客戶創作的內容數量"
+          },
+          {
+            "value": "200%",
+            "label": "轉換率提升",
+            "description": "內容營銷帶來的業務轉換"
+          }
+        ]
+      },
+      "testimonial": {
+        "enabled": true,
+        "quote": "他們的內容策略讓我們的品牌故事被更多人看見，社群互動率提升了5倍。",
+        "author": "林小姐",
+        "role": "品牌行銷經理",
+        "avatar": "/images/testimonial-2.jpg"
+      },
+      "cta": {
+        "title": "用內容打動您的客戶",
+        "description": "讓我們為您打造獨特的品牌內容策略。",
+        "buttonText": "開始合作",
+        "buttonLink": "#contact"
+      }
+    },
+    "offlinePromotion": {
+      "enabled": true,
+      "pageTitle": "線下推廣服務 | Big Bang Marketing",
+      "pageDescription": "專業線下推廣活動策劃，擴大品牌影響力",
+      "hero": {
+        "title": "線下推廣服務",
+        "subtitle": "Offline Promotion",
+        "description": "實體活動和傳統媒體推廣，擴大品牌影響力，創造線上線下整合體驗，讓品牌與消費者建立真實連結。",
+        "backgroundImage": "/images/offline-hero.jpg",
+        "buttonText": "免費諮詢",
+        "buttonLink": "#contact"
+      },
+      "features": {
+        "title": "我們的線下推廣特色",
+        "description": "實體活動創造真實連結",
+        "items": [
+          {
+            "icon": "fa-store",
+            "title": "快閃活動",
+            "description": "策劃創意快閃活動，製造話題性"
+          },
+          {
+            "icon": "fa-bullhorn",
+            "title": "街頭推廣",
+            "description": "直接觸達目標客群，提升品牌認知"
+          },
+          {
+            "icon": "fa-calendar-alt",
+            "title": "活動策劃",
+            "description": "從概念到執行，完整活動管理"
+          },
+          {
+            "icon": "fa-newspaper",
+            "title": "傳統媒體",
+            "description": "整合報章、電視等傳統媒體資源"
+          }
+        ]
+      },
+      "stats": {
+        "enabled": true,
+        "items": [
+          {
+            "value": "100+",
+            "label": "活動場次",
+            "description": "成功舉辦的線下活動"
+          },
+          {
+            "value": "50萬+",
+            "label": "觸及人數",
+            "description": "線下活動總觸及人次"
+          },
+          {
+            "value": "95%",
+            "label": "客戶滿意度",
+            "description": "活動滿意度評分"
+          }
+        ]
+      },
+      "testimonial": {
+        "enabled": true,
+        "quote": "他們策劃的快閃活動讓我們的產品在一天內被搶購一空，效果超出預期。",
+        "author": "黃先生",
+        "role": "零售品牌總經理",
+        "avatar": "/images/testimonial-3.jpg"
+      },
+      "cta": {
+        "title": "打造難忘的線下體驗",
+        "description": "讓我們為您策劃獨一無二的線下活動。",
+        "buttonText": "立即諮詢",
+        "buttonLink": "#contact"
+      }
+    },
+    "kolPromotion": {
+      "enabled": true,
+      "pageTitle": "KOL 推廣服務 | Big Bang Marketing",
+      "pageDescription": "專業 KOL 網紅行銷，精準觸達目標受眾",
+      "hero": {
+        "title": "KOL 推廣服務",
+        "subtitle": "KOL Marketing",
+        "description": "與關鍵意見領袖合作，精準觸達目標受眾，用真實推薦打動消費者，快速提升品牌知名度和信任度。",
+        "backgroundImage": "/images/kol-hero.jpg",
+        "buttonText": "免費諮詢",
+        "buttonLink": "#contact"
+      },
+      "features": {
+        "title": "我們的 KOL 推廣特色",
+        "description": "精準配對，真實合作",
+        "items": [
+          {
+            "icon": "fa-users",
+            "title": "網紅配對",
+            "description": "根據品牌調性配對最適合的 KOL"
+          },
+          {
+            "icon": "fa-chart-bar",
+            "title": "數據分析",
+            "description": "分析 KOL 受眾數據，確保精準投放"
+          },
+          {
+            "icon": "fa-handshake",
+            "title": "合作洽談",
+            "description": "處理所有合作細節，讓您無後顧之憂"
+          },
+          {
+            "icon": "fa-chart-line",
+            "title": "成效追蹤",
+            "description": "實時監測合作成效，優化投資回報"
+          }
+        ]
+      },
+      "stats": {
+        "enabled": true,
+        "items": [
+          {
+            "value": "500+",
+            "label": "合作 KOL",
+            "description": "累積合作網紅數量"
+          },
+          {
+            "value": "1000萬+",
+            "label": "總粉絲數",
+            "description": "覆蓋的總粉絲數量"
+          },
+          {
+            "value": "8.5%",
+            "label": "平均互動率",
+            "description": "超過業界平均水平"
+          }
+        ]
+      },
+      "testimonial": {
+        "enabled": true,
+        "quote": "KOL 合作讓我們的新品在上市首週就創下銷售記錄，ROI 達到 500%。",
+        "author": "張小姐",
+        "role": "美妝品牌行銷總監",
+        "avatar": "/images/testimonial-4.jpg"
+      },
+      "cta": {
+        "title": "找到最適合的 KOL 夥伴",
+        "description": "我們幫您精準配對最合適的意見領袖。",
+        "buttonText": "開始合作",
+        "buttonLink": "#contact"
+      }
+    },
+    "webDesign": {
+      "enabled": true,
+      "pageTitle": "網頁設計服務 | Big Bang Marketing",
+      "pageDescription": "專業網站設計，打造現代化品牌形象",
+      "hero": {
+        "title": "網頁設計服務",
+        "subtitle": "Web Design",
+        "description": "設計現代化、響應式網站，提升用戶體驗，打造專業品牌形象，讓您的業務在數碼世界中脫穎而出。",
+        "backgroundImage": "/images/webdesign-hero.jpg",
+        "buttonText": "免費諮詢",
+        "buttonLink": "#contact"
+      },
+      "features": {
+        "title": "我們的網頁設計特色",
+        "description": "美觀與功能並重的設計",
+        "items": [
+          {
+            "icon": "fa-paint-brush",
+            "title": "客製化設計",
+            "description": "根據品牌調性打造獨特視覺風格"
+          },
+          {
+            "icon": "fa-mobile-alt",
+            "title": "響應式設計",
+            "description": "完美適配各種裝置和螢幕尺寸"
+          },
+          {
+            "icon": "fa-bolt",
+            "title": "極速載入",
+            "description": "優化效能，確保網站快速載入"
+          },
+          {
+            "icon": "fa-search",
+            "title": "SEO 友善",
+            "description": "符合 SEO 最佳實踐，提升搜尋排名"
+          }
+        ]
+      },
+      "stats": {
+        "enabled": true,
+        "items": [
+          {
+            "value": "200+",
+            "label": "完成專案",
+            "description": "成功上線的網站數量"
+          },
+          {
+            "value": "3秒",
+            "label": "平均載入",
+            "description": "網站載入速度"
+          },
+          {
+            "value": "A+",
+            "label": "用戶體驗評級",
+            "description": "第三方評測結果"
+          }
+        ]
+      },
+      "testimonial": {
+        "enabled": true,
+        "quote": "新網站上線後，我們的詢問量增加了300%，客戶都稱讚網站設計專業。",
+        "author": "王先生",
+        "role": "B2B 企業負責人",
+        "avatar": "/images/testimonial-5.jpg"
+      },
+      "techStack": {
+        "enabled": true,
+        "title": "我們使用的技術",
+        "description": "採用業界領先技術，確保網站品質",
+        "items": [
+          {
+            "name": "React",
+            "icon": "fa-react"
+          },
+          {
+            "name": "Next.js",
+            "icon": "fa-node-js"
+          },
+          {
+            "name": "WordPress",
+            "icon": "fa-wordpress"
+          },
+          {
+            "name": "Shopify",
+            "icon": "fa-shopify"
+          },
+          {
+            "name": "Vue.js",
+            "icon": "fa-vuejs"
+          },
+          {
+            "name": "Node.js",
+            "icon": "fa-node"
+          }
+        ]
+      },
+      "cta": {
+        "title": "打造您的專業網站",
+        "description": "讓我們為您設計一個令人印象深刻的網站。",
+        "buttonText": "開始專案",
+        "buttonLink": "#contact"
+      }
+    },
+    "packagingDesign": {
+      "enabled": true,
+      "pageTitle": "包裝設計服務 | Big Bang Marketing",
+      "pageDescription": "專業包裝設計，讓產品在貨架上脫穎而出",
+      "hero": {
+        "title": "包裝/Poster 設計",
+        "subtitle": "Packaging & Poster Design",
+        "description": "創意包裝和平面設計，讓產品更具吸引力，在貨架上脫穎而出，傳達品牌價值和故事。",
+        "backgroundImage": "/images/packaging-hero.jpg",
+        "buttonText": "免費諮詢",
+        "buttonLink": "#contact"
+      },
+      "features": {
+        "title": "我們的設計特色",
+        "description": "創意與策略結合的設計",
+        "items": [
+          {
+            "icon": "fa-palette",
+            "title": "品牌視覺",
+            "description": "打造一致性的品牌視覺識別系統"
+          },
+          {
+            "icon": "fa-box-open",
+            "title": "包裝設計",
+            "description": "設計實用且美觀的產品包裝"
+          },
+          {
+            "icon": "fa-image",
+            "title": "海報設計",
+            "description": "創作吸引眼球的宣傅海報"
+          },
+          {
+            "icon": "fa-print",
+            "title": "印刷管理",
+            "description": "處理印刷流程，確保品質"
+          }
+        ]
+      },
+      "stats": {
+        "enabled": true,
+        "items": [
+          {
+            "value": "150+",
+            "label": "設計專案",
+            "description": "完成的包裝與平面設計"
+          },
+          {
+            "value": "30%",
+            "label": "銷售提升",
+            "description": "新包裝帶來的平均銷售增長"
+          },
+          {
+            "value": "20+",
+            "label": "設計獎項",
+            "description": "獲得的設計獎項數量"
+          }
+        ]
+      },
+      "testimonial": {
+        "enabled": true,
+        "quote": "新包裝設計讓我們的產品在通路中脫穎而出，銷售量成長了50%。",
+        "author": "李小姐",
+        "role": "食品品牌創辦人",
+        "avatar": "/images/testimonial-6.jpg"
+      },
+      "cta": {
+        "title": "讓產品包裝說話",
+        "description": "用設計為您的產品加分。",
+        "buttonText": "開始設計",
+        "buttonLink": "#contact"
+      }
+    }
+  },
+  "lastUpdated": "2026-04-13T04:06:10.559Z"
 }
