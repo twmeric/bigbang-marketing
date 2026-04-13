@@ -1,108 +1,36 @@
-name: Deploy to Cloudflare (Third Party Domain)
+name: Deploy to Cloudflare Pages
 
 on:
-  workflow_dispatch:
-    inputs:
-      reason:
-        description: 'Deployment reason'
-        required: false
-        default: 'Manual deployment'
   push:
     branches: [main]
+  workflow_dispatch:
 
 env:
   NODE_VERSION: '22'
 
-permissions:
-  contents: read
-  deployments: write
-
 jobs:
-  deploy-web:
-    name: Deploy Web to Pages
+  deploy:
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: my-app
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      
+      - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Check Environment Variables
-        run: |
-          echo "🔍 Checking environment variables..."
-          if [ -z "${{ secrets.CMS_API_URL }}" ]; then
-            echo "❌ ERROR: CMS_API_URL secret is not set!"
-            echo "Please set CMS_API_URL in GitHub Secrets to: https://bigbang-marketing-cms.jimsbond007.workers.dev"
-            exit 1
-          else
-            echo "✅ CMS_API_URL is configured"
-            echo "API URL: ${{ secrets.CMS_API_URL }}"
-          fi
-
+      
+      - run: npm install
+      
       - name: Build
         run: npm run build
         env:
           NEXT_PUBLIC_CMS_API_URL: ${{ secrets.CMS_API_URL }}
-
-      # 部署到您的賬戶A (Pages)
+      
       - name: Deploy to Cloudflare Pages
-        run: npx wrangler pages deploy dist --project-name=bigbang-marketing --branch=main
-        env:
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-
-      # 清除第三者賬戶B的緩存（關鍵步驟）
-      - name: Purge Cloudflare Cache (Third Party Account)
-        run: |
-          echo "Purging cache for domain..."
-          RESPONSE=$(curl -s -X POST "https://api.cloudflare.com/client/v4/zones/${{ secrets.DOMAIN_OWNER_ZONE_ID }}/purge_cache" \
-            -H "Authorization: Bearer ${{ secrets.DOMAIN_OWNER_API_TOKEN }}" \
-            -H "Content-Type: application/json" \
-            --data '{"purge_everything":true}')
-          
-          echo "API Response: $RESPONSE"
-          
-          if echo "$RESPONSE" | grep -q '"success":true'; then
-            echo "✅ Cache purged successfully"
-          else
-            echo "⚠️ Cache purge may have failed, but deployment continues"
-            echo "$RESPONSE" | grep -o '"message":"[^"]*"' || true
-          fi
-        env:
-          DOMAIN_OWNER_ZONE_ID: ${{ secrets.DOMAIN_OWNER_ZONE_ID }}
-          DOMAIN_OWNER_API_TOKEN: ${{ secrets.DOMAIN_OWNER_API_TOKEN }}
-
-  deploy-worker:
-    name: Deploy Worker
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: my-app/apps/cms-worker
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-
-      - name: Install dependencies
-        run: npm install
-
-      # 部署 Worker 到您的賬戶A
-      - name: Deploy Worker
         uses: cloudflare/wrangler-action@v3
         with:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          workingDirectory: my-app/apps/cms-worker
+          command: pages deploy dist --project-name=bigbang-marketing --branch=main
