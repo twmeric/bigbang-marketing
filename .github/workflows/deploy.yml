@@ -1,4 +1,4 @@
-name: Build Project
+name: Build and Deploy
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -26,8 +26,10 @@ jobs:
         env:
           NEXT_PUBLIC_CMS_API_URL: ${{ secrets.CMS_API_URL }}
 
-      - name: Upload dist folder
-        uses: actions/upload-artifact@v4
+      - name: Deploy to Cloudflare
+        uses: cloudflare/wrangler-action@v3
         with:
-          name: dist-folder
-          path: my-app/dist
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: my-app
+          command: pages deploy dist --project-name=bigbang-marketing --branch=main
