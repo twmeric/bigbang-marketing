@@ -5,11 +5,8 @@ on:
     branches: [main]
   workflow_dispatch:
 
-env:
-  NODE_VERSION: '22'
-
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -17,11 +14,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      - uses: actions/setup-node@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: ${{ env.NODE_VERSION }}
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: my-app/package-lock.json
       
-      - run: npm install
+      - name: Install dependencies
+        run: npm ci
       
       - name: Build
         run: npm run build
@@ -29,8 +30,6 @@ jobs:
           NEXT_PUBLIC_CMS_API_URL: ${{ secrets.CMS_API_URL }}
       
       - name: Deploy to Cloudflare Pages
-        uses: cloudflare/wrangler-action@v3
-        with:
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          command: pages deploy dist --project-name=bigbang-marketing --branch=main
+        run: npx wrangler pages deploy dist --project-name=bigbang-marketing --branch=main
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
