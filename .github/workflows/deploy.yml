@@ -8,68 +8,32 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: my-app
-        shell: bash
+    permissions:
+      contents: read
+      deployments: write
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: '20'
 
-      - name: Debug info
+      - name: Install and Build
+        working-directory: my-app
         run: |
-          echo "Node version: $(node -v)"
-          echo "NPM version: $(npm -v)"
-          echo "Working directory: $(pwd)"
-          ls -la
-
-      - name: Install dependencies
-        run: |
-          echo "Installing dependencies..."
           npm install
-          echo "Dependencies installed successfully"
-
-      - name: Check environment
-        run: |
-          echo "Checking CMS_API_URL..."
-          if [ -z "${{ secrets.CMS_API_URL }}" ]; then
-            echo "WARNING: CMS_API_URL is not set, using default"
-          else
-            echo "CMS_API_URL is configured"
-          fi
-
-      - name: Fetch CMS data
-        run: |
-          echo "Fetching CMS data..."
-          node scripts/fetch-cms.js
-        env:
-          NEXT_PUBLIC_CMS_API_URL: ${{ secrets.CMS_API_URL || 'https://bigbang-marketing-cms.jimsbond007.workers.dev' }}
-
-      - name: Build project
-        run: |
-          echo "Starting build..."
+          npm run fetch-cms
           npm run build
-          echo "Build completed"
         env:
-          NEXT_PUBLIC_CMS_API_URL: ${{ secrets.CMS_API_URL || 'https://bigbang-marketing-cms.jimsbond007.workers.dev' }}
-          CI: true
+          NEXT_PUBLIC_CMS_API_URL: ${{ secrets.CMS_API_URL }}
 
-      - name: Check dist folder
-        run: |
-          echo "Checking dist folder..."
-          ls -la dist/ || echo "Dist folder not found"
-
-      - name: Install Wrangler
-        run: npm install -g wrangler
-
-      - name: Deploy to Cloudflare Pages
-        run: |
-          echo "Deploying to Cloudflare Pages..."
-          wrangler pages deploy dist --project-name=bigbang-marketing --branch=main
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      - name: Deploy
+        uses: cloudflare/pages-action@v1
+        with:
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          projectName: bigbang-marketing
+          directory: my-app/dist
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
