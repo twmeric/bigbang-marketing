@@ -8,9 +8,6 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      deployments: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -20,7 +17,7 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install and Build
+      - name: Build
         working-directory: my-app
         run: |
           npm install
@@ -29,11 +26,9 @@ jobs:
         env:
           NEXT_PUBLIC_CMS_API_URL: ${{ secrets.CMS_API_URL }}
 
-      - name: Deploy
-        uses: cloudflare/pages-action@v1
+      - name: Deploy to Cloudflare
+        uses: cloudflare/wrangler-action@v3
         with:
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          projectName: bigbang-marketing
-          directory: my-app/dist
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy my-app/dist --project-name=bigbang-marketing --branch=main
