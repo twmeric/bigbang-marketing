@@ -14,7 +14,7 @@ export default function CasesSection() {
   const { cmsData } = useCMS();
 
   // Get cases section config from CMS with defaults
-  const cases = cmsData?.cases || {
+  const defaultCases = {
     enabled: true,
     sectionTagline: "Our Work",
     sectionTitle: "成功案例",
@@ -22,7 +22,9 @@ export default function CasesSection() {
     clientLabel: "客戶：",
     viewDetailsText: "查看詳情",
     viewMoreText: "查看更多案例",
+    items: [],
   };
+  const cases = { ...defaultCases, ...(cmsData?.cases || {}) };
 
   // Hide section if disabled
   if (!cases.enabled) return null;
@@ -53,7 +55,8 @@ export default function CasesSection() {
     return () => ctx.revert();
   }, []);
 
-  const { cases: caseItems } = casesData;
+  // CMS-driven cases items (fallback to local cases.json if not in CMS)
+  const caseItems = cases.items?.length > 0 ? cases.items : casesData.cases;
 
   return (
     <section

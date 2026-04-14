@@ -1,12 +1,15 @@
-// CMS Data Types
+// CMS Data Types - aligned with frontend components and worker default data
+
 export interface SiteConfig {
   name: string;
+  title?: string;
+  description?: string;
   logo?: string;
   favicon?: string;
   language?: string;
 }
 
-export interface HeroSection {
+export interface HeroSectionData {
   enabled: boolean;
   backgroundImage: string;
   titleLine1: string;
@@ -18,7 +21,7 @@ export interface HeroSection {
   buttonLink: string;
 }
 
-export interface AboutSection {
+export interface AboutSectionData {
   enabled: boolean;
   sectionTagline: string;
   sectionTitle: string;
@@ -29,65 +32,117 @@ export interface AboutSection {
   ctaLink: string;
 }
 
-export interface ServicesSection {
+export interface ServiceItem {
+  id: string;
+  icon: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  link: string;
+  enabled: boolean;
+}
+
+export interface ServicesSectionData {
   enabled: boolean;
   sectionTagline: string;
   sectionTitle: string;
   sectionDescription: string;
-  items: {
-    id: string;
-    icon: string;
-    title: string;
-    description: string;
-    link: string;
-  }[];
+  readMoreText: string;
+  items: ServiceItem[];
 }
 
-export interface CasesSection {
+export interface CaseItem {
+  id: string | number;
+  client: string;
+  title: string;
+  description: string;
+  image: string;
+  category: string;
+}
+
+export interface CasesSectionData {
   enabled: boolean;
   sectionTagline: string;
   sectionTitle: string;
   sectionDescription: string;
-  items: {
-    id: string;
-    client: string;
-    title: string;
-    description: string;
-    image: string;
-    category: string;
-  }[];
+  clientLabel: string;
+  viewDetailsText: string;
+  viewMoreText: string;
+  items: CaseItem[];
 }
 
-export interface GrowthSection {
+export interface GrowthStrategy {
+  icon: string;
+  title: string;
+  description: string;
+}
+
+export interface GrowthSectionData {
+  enabled: boolean;
+  sectionTagline: string;
+  sectionTitle: string;
+  introParagraph1: string;
+  introParagraph2: string;
+  strategiesTitle: string;
+  strategiesDescription: string;
+  strategies: GrowthStrategy[];
+  ctaText: string;
+  ctaLink: string;
+}
+
+export interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+export interface FAQSectionData {
   enabled: boolean;
   sectionTagline: string;
   sectionTitle: string;
   sectionDescription: string;
-  strategies: {
-    icon: string;
-    title: string;
-    description: string;
-  }[];
+  items: FAQItem[];
+  ctaTitle: string;
+  ctaDescription: string;
+  ctaButtonText: string;
 }
 
-export interface FAQSection {
+export interface PartnerItem {
+  name: string;
+  icon?: string;
+  logo?: string;
+}
+
+export interface PartnersSectionData {
   enabled: boolean;
   sectionTagline: string;
   sectionTitle: string;
-  items: {
-    question: string;
-    answer: string;
-  }[];
+  sectionDescription: string;
+  items: PartnerItem[];
 }
 
-export interface PartnersSection {
-  enabled: boolean;
-  sectionTagline: string;
-  sectionTitle: string;
-  items: { name: string; logo: string }[];
+export interface ContactFormConfig {
+  nameLabel: string;
+  namePlaceholder: string;
+  phoneLabel: string;
+  phonePlaceholder: string;
+  emailLabel: string;
+  emailPlaceholder: string;
+  serviceLabel: string;
+  servicePlaceholder: string;
+  serviceOptions: string[];
+  messageLabel: string;
+  messagePlaceholder: string;
+  submitButton: string;
+  submittingText: string;
+  successTitle: string;
+  successMessage: string;
+  successButton: string;
+  footnote: string;
+  errorMessage: string;
+  errorDetail: string;
 }
 
-export interface ContactSection {
+export interface ContactSectionData {
   enabled: boolean;
   sectionTagline: string;
   sectionTitle: string;
@@ -100,36 +155,21 @@ export interface ContactSection {
   emailAddress: string;
   addressLabel: string;
   address: string;
-  form: {
-    nameLabel: string;
-    namePlaceholder: string;
-    phoneLabel: string;
-    phonePlaceholder: string;
-    emailLabel: string;
-    emailPlaceholder: string;
-    serviceLabel: string;
-    servicePlaceholder: string;
-    serviceOptions: string[];
-    messageLabel: string;
-    messagePlaceholder: string;
-    submitButton: string;
-    submittingText: string;
-    successTitle: string;
-    successMessage: string;
-    successButton: string;
-    footnote: string;
-    errorMessage: string;
-    errorDetail: string;
-  };
+  form: ContactFormConfig;
 }
 
-export interface FooterSection {
+export interface FooterLink {
+  name: string;
+  href: string;
+}
+
+export interface FooterSectionData {
   enabled: boolean;
   companyName: string;
   companyDescription: string;
-  services: { name: string; href: string }[];
-  company: { name: string; href: string }[];
-  links: { name: string; href: string }[];
+  services: FooterLink[];
+  company: FooterLink[];
+  links: FooterLink[];
   copyright: string;
   social: {
     facebook: string;
@@ -138,8 +178,14 @@ export interface FooterSection {
   };
 }
 
-export interface Navigation {
-  items: { name: string; href: string; children?: { name: string; href: string }[] }[];
+export interface NavItem {
+  name: string;
+  href: string;
+  children?: { name: string; href: string }[];
+}
+
+export interface NavigationData {
+  items: NavItem[];
   ctaButton: { text: string; href: string };
 }
 
@@ -190,7 +236,7 @@ export interface ServicePageData {
     enabled: boolean;
     title: string;
     description: string;
-    items: { name: string }[];
+    items: { name: string; icon?: string }[];
   };
   relatedCases?: {
     enabled: boolean;
@@ -206,7 +252,7 @@ export interface ServicePageData {
   };
 }
 
-export interface ServicePages {
+export interface ServicePagesData {
   seo: ServicePageData;
   contentMarketing: ServicePageData;
   offlinePromotion: ServicePageData;
@@ -217,16 +263,16 @@ export interface ServicePages {
 
 export interface CMSData {
   site: SiteConfig;
-  hero: HeroSection;
-  about: AboutSection;
-  services: ServicesSection;
-  cases: CasesSection;
-  growth: GrowthSection;
-  faq: FAQSection;
-  partners: PartnersSection;
-  contact: ContactSection;
-  footer: FooterSection;
-  navigation: Navigation;
-  servicePages: ServicePages;
+  hero: HeroSectionData;
+  about: AboutSectionData;
+  services: ServicesSectionData;
+  cases: CasesSectionData;
+  growth: GrowthSectionData;
+  faq: FAQSectionData;
+  partners: PartnersSectionData;
+  contact: ContactSectionData;
+  footer: FooterSectionData;
+  navigation: NavigationData;
+  servicePages: ServicePagesData;
   lastUpdated: string;
 }

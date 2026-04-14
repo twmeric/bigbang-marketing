@@ -148,7 +148,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
           <div className="flex items-center space-x-4">
             <a
-              href="https://bigbang.jkdcoding.com"
+              href="https://www.bigbangmarketing.hk"
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm text-gray-600 hover:text-yellow-600 flex items-center space-x-1"

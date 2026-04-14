@@ -4,5 +4,5 @@
 import type { CMSData } from "@/types/cms";
 import cmsData from "./cms.json";
 
-export const defaultCMSData = cmsData as CMSData;
-export default cmsData as CMSData;
+export const defaultCMSData = cmsData as unknown as CMSData;
+export default cmsData as unknown as CMSData;

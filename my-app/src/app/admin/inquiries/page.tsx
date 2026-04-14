@@ -64,7 +64,7 @@ export default function InquiriesPage() {
       inquiry.message || "無留言",
       "",
       "---",
-      "👉 查看詳情: bigbang.jkdcoding.com/admin/inquiries",
+      "👉 查看詳情: www.bigbangmarketing.hk/admin/inquiries",
     ]
       .filter(Boolean)
       .join("\n");

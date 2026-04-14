@@ -212,10 +212,10 @@ export default function ContentPage() {
                           <div className="flex-1">
                             <FormInput 
                               label={`項目 ${index + 1} 名稱`} 
-                              value={item.label || ""} 
+                              value={item.name || ""} 
                               onChange={(v: string) => {
                                 const newItems = [...(formData.navigation?.items || [])];
-                                newItems[index] = { ...item, label: v };
+                                newItems[index] = { ...item, name: v };
                                 updateFormSection("navigation", { items: newItems });
                               }} 
                             />
@@ -237,7 +237,7 @@ export default function ContentPage() {
                                   onClick={() => {
                                     const newItems = [...(formData.navigation?.items || [])];
                                     if (!newItems[index].children) newItems[index].children = [];
-                                    newItems[index].children.push({ label: "新子項目", href: "#" });
+                                    newItems[index].children.push({ name: "新子項目", href: "#" });
                                     updateFormSection("navigation", { items: newItems });
                                   }}
                                   className="text-xs text-blue-600 hover:text-blue-800"
@@ -249,10 +249,11 @@ export default function ContentPage() {
                                 <div key={childIndex} className="flex gap-2 mb-2">
                                   <input
                                     type="text"
-                                    value={child.label || ""}
+                                    value={child.name || child.label || ""}
                                     onChange={(e) => {
                                       const newItems = [...(formData.navigation?.items || [])];
-                                      newItems[index].children[childIndex].label = e.target.value;
+                                      newItems[index].children[childIndex].name = e.target.value;
+                                      delete newItems[index].children[childIndex].label;
                                       updateFormSection("navigation", { items: newItems });
                                     }}
                                     className="flex-1 px-3 py-1 text-sm border border-gray-200 rounded"
@@ -297,7 +298,7 @@ export default function ContentPage() {
                     </div>
                     <button
                       onClick={() => {
-                        const newItems = [...(formData.navigation?.items || []), { label: "新項目", href: "#" }];
+                        const newItems = [...(formData.navigation?.items || []), { name: "新項目", href: "#" }];
                         updateFormSection("navigation", { items: newItems });
                       }}
                       className="mt-3 text-sm text-blue-600 hover:text-blue-800 font-medium"
@@ -312,13 +313,13 @@ export default function ContentPage() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <FormInput 
                         label="按鈕文字" 
-                        value={formData.navigation?.cta?.label || ""} 
-                        onChange={(v: string) => updateFormSection("navigation", { cta: { ...formData.navigation?.cta, label: v } })} 
+                        value={formData.navigation?.ctaButton?.text || ""} 
+                        onChange={(v: string) => updateFormSection("navigation", { ctaButton: { ...formData.navigation?.ctaButton, text: v } })} 
                       />
                       <FormInput 
                         label="按鈕連結" 
-                        value={formData.navigation?.cta?.href || ""} 
-                        onChange={(v: string) => updateFormSection("navigation", { cta: { ...formData.navigation?.cta, href: v } })} 
+                        value={formData.navigation?.ctaButton?.href || ""} 
+                        onChange={(v: string) => updateFormSection("navigation", { ctaButton: { ...formData.navigation?.ctaButton, href: v } })} 
                       />
                     </div>
                   </div>
@@ -351,11 +352,63 @@ export default function ContentPage() {
                 <FormCheckbox label="顯示此區域" checked={formData.about?.enabled ?? true} onChange={(v: boolean) => updateFormSection("about", { enabled: v })} />
                 {formData.about?.enabled !== false && (
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-                    <FormInput label="標籤" value={formData.about?.tag || ""} onChange={(v: string) => updateFormSection("about", { tag: v })} />
-                    <FormInput label="標題" value={formData.about?.title || ""} onChange={(v: string) => updateFormSection("about", { title: v })} />
-                    <FormInput label="副標題" value={formData.about?.heading || ""} onChange={(v: string) => updateFormSection("about", { heading: v })} />
-                    <FormInput label="按鈕文字" value={formData.about?.buttonText || ""} onChange={(v: string) => updateFormSection("about", { buttonText: v })} />
+                    <FormInput label="區域標籤" value={formData.about?.sectionTagline || ""} onChange={(v: string) => updateFormSection("about", { sectionTagline: v })} />
+                    <FormInput label="區域標題" value={formData.about?.sectionTitle || ""} onChange={(v: string) => updateFormSection("about", { sectionTitle: v })} />
+                    <FormInput label="主標題" value={formData.about?.mainHeading || ""} onChange={(v: string) => updateFormSection("about", { mainHeading: v })} />
+                    <FormInput label="CTA 文字" value={formData.about?.ctaText || ""} onChange={(v: string) => updateFormSection("about", { ctaText: v })} />
+                    <FormInput label="CTA 連結" value={formData.about?.ctaLink || ""} onChange={(v: string) => updateFormSection("about", { ctaLink: v })} />
                     <FormTextarea label="描述" value={formData.about?.description || ""} onChange={(v: string) => updateFormSection("about", { description: v })} className="md:col-span-2" />
+
+                    {/* About Features */}
+                    <div className="md:col-span-2 border-t pt-4">
+                      <label className="block text-sm font-medium text-gray-700 mb-3">特色列表</label>
+                      <div className="space-y-3">
+                        {(formData.about?.features || []).map((feature: any, index: number) => (
+                          <div key={index} className="flex gap-2 items-center">
+                            <input
+                              type="text"
+                              value={feature.icon || ""}
+                              onChange={(e) => {
+                                const newFeatures = [...(formData.about?.features || [])];
+                                newFeatures[index] = { ...feature, icon: e.target.value };
+                                updateFormSection("about", { features: newFeatures });
+                              }}
+                              className="w-32 px-3 py-2 text-sm border border-gray-200 rounded"
+                              placeholder="圖標"
+                            />
+                            <input
+                              type="text"
+                              value={feature.text || ""}
+                              onChange={(e) => {
+                                const newFeatures = [...(formData.about?.features || [])];
+                                newFeatures[index] = { ...feature, text: e.target.value };
+                                updateFormSection("about", { features: newFeatures });
+                              }}
+                              className="flex-1 px-3 py-2 text-sm border border-gray-200 rounded"
+                              placeholder="文字"
+                            />
+                            <button
+                              onClick={() => {
+                                const newFeatures = (formData.about?.features || []).filter((_: any, i: number) => i !== index);
+                                updateFormSection("about", { features: newFeatures });
+                              }}
+                              className="text-red-500 hover:text-red-700 px-2"
+                            >
+                              <i className="fas fa-trash"></i>
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+                      <button
+                        onClick={() => {
+                          const newFeatures = [...(formData.about?.features || []), { icon: "star", text: "新特色" }];
+                          updateFormSection("about", { features: newFeatures });
+                        }}
+                        className="mt-3 text-sm text-blue-600 hover:text-blue-800 font-medium"
+                      >
+                        <i className="fas fa-plus mr-1"></i> 添加特色
+                      </button>
+                    </div>
                   </div>
                 )}
               </SectionEditor>
@@ -367,9 +420,10 @@ export default function ContentPage() {
                 <FormCheckbox label="顯示服務區域" checked={formData.services?.enabled ?? true} onChange={(v: boolean) => updateFormSection("services", { enabled: v })} />
                 {formData.services?.enabled !== false && (
                   <div className="space-y-6 mt-6">
-                    <FormInput label="標籤" value={formData.services?.tag || ""} onChange={(v: string) => updateFormSection("services", { tag: v })} />
-                    <FormInput label="標題" value={formData.services?.title || ""} onChange={(v: string) => updateFormSection("services", { title: v })} />
-                    <FormTextarea label="描述" value={formData.services?.description || ""} onChange={(v: string) => updateFormSection("services", { description: v })} />
+                    <FormInput label="區域標籤" value={formData.services?.sectionTagline || ""} onChange={(v: string) => updateFormSection("services", { sectionTagline: v })} />
+                    <FormInput label="區域標題" value={formData.services?.sectionTitle || ""} onChange={(v: string) => updateFormSection("services", { sectionTitle: v })} />
+                    <FormTextarea label="區域描述" value={formData.services?.sectionDescription || ""} onChange={(v: string) => updateFormSection("services", { sectionDescription: v })} />
+                    <FormInput label="了解更多文字" value={formData.services?.readMoreText || ""} onChange={(v: string) => updateFormSection("services", { readMoreText: v })} />
                     
                     {/* 服務項目列表 */}
                     <div className="border-t pt-4">
@@ -393,9 +447,9 @@ export default function ContentPage() {
                                 newItems[index] = { ...item, subtitle: v };
                                 updateFormSection("services", { items: newItems });
                               }} />
-                              <FormInput label="連結" value={item.href || ""} onChange={(v: string) => {
+                              <FormInput label="連結" value={item.link || ""} onChange={(v: string) => {
                                 const newItems = [...(formData.services?.items || [])];
-                                newItems[index] = { ...item, href: v };
+                                newItems[index] = { ...item, link: v };
                                 updateFormSection("services", { items: newItems });
                               }} />
                             </div>
@@ -404,6 +458,21 @@ export default function ContentPage() {
                               newItems[index] = { ...item, description: v };
                               updateFormSection("services", { items: newItems });
                             }} className="mt-2" />
+                            <div className="mt-2">
+                              <label className="flex items-center space-x-2 cursor-pointer">
+                                <input
+                                  type="checkbox"
+                                  checked={item.enabled !== false}
+                                  onChange={(e) => {
+                                    const newItems = [...(formData.services?.items || [])];
+                                    newItems[index] = { ...item, enabled: e.target.checked };
+                                    updateFormSection("services", { items: newItems });
+                                  }}
+                                  className="w-4 h-4 text-yellow-400 border-gray-300 rounded focus:ring-yellow-400"
+                                />
+                                <span className="text-sm text-gray-700">啟用此服務</span>
+                              </label>
+                            </div>
                           </div>
                         ))}
                       </div>
@@ -486,6 +555,25 @@ export default function ContentPage() {
                                 value={pageData.features?.title || ""} 
                                 onChange={(v: string) => updateServicePageSection(pageType.key, pageData, "features", { ...pageData.features, title: v }, formData, updateFormSection)} 
                               />
+                              <FormTextarea 
+                                label="特色區域描述" 
+                                value={pageData.features?.description || ""} 
+                                onChange={(v: string) => updateServicePageSection(pageType.key, pageData, "features", { ...pageData.features, description: v }, formData, updateFormSection)} 
+                                className="mt-2"
+                              />
+                              <div className="mt-4 space-y-3">
+                                {(pageData.features?.items || []).map((feature: any, idx: number) => (
+                                  <div key={idx} className="p-3 bg-gray-50 rounded flex gap-3 items-start">
+                                    <FormInput label="圖標" value={feature.icon || ""} onChange={(v: string) => updateFeatureItem(pageType.key, pageData, idx, "icon", v, formData, updateFormSection)} className="w-32" />
+                                    <div className="flex-1 space-y-2">
+                                      <FormInput label="標題" value={feature.title || ""} onChange={(v: string) => updateFeatureItem(pageType.key, pageData, idx, "title", v, formData, updateFormSection)} />
+                                      <FormTextarea label="描述" value={feature.description || ""} onChange={(v: string) => updateFeatureItem(pageType.key, pageData, idx, "description", v, formData, updateFormSection)} />
+                                    </div>
+                                    <button onClick={() => removeFeatureItem(pageType.key, pageData, idx, formData, updateFormSection)} className="text-red-500 hover:text-red-700 mt-6"><i className="fas fa-trash"></i></button>
+                                  </div>
+                                ))}
+                                <button onClick={() => addFeatureItem(pageType.key, pageData, formData, updateFormSection)} className="text-sm text-blue-600 hover:text-blue-800 font-medium"><i className="fas fa-plus mr-1"></i> 添加特色項目</button>
+                              </div>
                             </div>
 
                             {/* Stats 區域 */}
@@ -531,6 +619,29 @@ export default function ContentPage() {
                               )}
                             </div>
 
+                            {/* Process 區域 */}
+                            <div className="bg-white p-4 rounded-lg">
+                              <h4 className="font-medium text-gray-700 mb-3">服務流程</h4>
+                              <FormInput 
+                                label="流程區域標題" 
+                                value={pageData.process?.title || ""} 
+                                onChange={(v: string) => updateServicePageSection(pageType.key, pageData, "process", { ...pageData.process, title: v }, formData, updateFormSection)} 
+                              />
+                              <div className="mt-4 space-y-3">
+                                {(pageData.process?.steps || []).map((step: any, idx: number) => (
+                                  <div key={idx} className="p-3 bg-gray-50 rounded flex gap-3 items-start">
+                                    <FormInput label="步驟編號" value={step.number || ""} onChange={(v: string) => updateProcessStep(pageType.key, pageData, idx, "number", v, formData, updateFormSection)} className="w-24" />
+                                    <div className="flex-1 space-y-2">
+                                      <FormInput label="標題" value={step.title || ""} onChange={(v: string) => updateProcessStep(pageType.key, pageData, idx, "title", v, formData, updateFormSection)} />
+                                      <FormTextarea label="描述" value={step.description || ""} onChange={(v: string) => updateProcessStep(pageType.key, pageData, idx, "description", v, formData, updateFormSection)} />
+                                    </div>
+                                    <button onClick={() => removeProcessStep(pageType.key, pageData, idx, formData, updateFormSection)} className="text-red-500 hover:text-red-700 mt-6"><i className="fas fa-trash"></i></button>
+                                  </div>
+                                ))}
+                                <button onClick={() => addProcessStep(pageType.key, pageData, formData, updateFormSection)} className="text-sm text-blue-600 hover:text-blue-800 font-medium"><i className="fas fa-plus mr-1"></i> 添加流程步驟</button>
+                              </div>
+                            </div>
+
                             {/* Tech Stack 區域 - 僅 webDesign */}
                             {pageType.key === "webDesign" && (
                               <div className="bg-white p-4 rounded-lg">
@@ -562,6 +673,35 @@ export default function ContentPage() {
                                 )}
                               </div>
                             )}
+
+                            {/* FAQ 區域 */}
+                            <div className="bg-white p-4 rounded-lg">
+                              <h4 className="font-medium text-gray-700 mb-3">常見問題</h4>
+                              <FormCheckbox 
+                                label="顯示 FAQ" 
+                                checked={pageData.faq?.enabled ?? true} 
+                                onChange={(v: boolean) => updateServicePageSection(pageType.key, pageData, "faq", { ...pageData.faq, enabled: v }, formData, updateFormSection)} 
+                              />
+                              {pageData.faq?.enabled !== false && (
+                                <div className="mt-4 space-y-3">
+                                  <FormInput 
+                                    label="FAQ 區域標題" 
+                                    value={pageData.faq?.title || ""} 
+                                    onChange={(v: string) => updateServicePageSection(pageType.key, pageData, "faq", { ...pageData.faq, title: v }, formData, updateFormSection)} 
+                                  />
+                                  {(pageData.faq?.items || []).map((faqItem: any, idx: number) => (
+                                    <div key={idx} className="p-3 bg-gray-50 rounded flex gap-3 items-start">
+                                      <div className="flex-1 space-y-2">
+                                        <FormInput label="問題" value={faqItem.question || ""} onChange={(v: string) => updateFAQItem(pageType.key, pageData, idx, "question", v, formData, updateFormSection)} />
+                                        <FormTextarea label="回答" value={faqItem.answer || ""} onChange={(v: string) => updateFAQItem(pageType.key, pageData, idx, "answer", v, formData, updateFormSection)} />
+                                      </div>
+                                      <button onClick={() => removeFAQItem(pageType.key, pageData, idx, formData, updateFormSection)} className="text-red-500 hover:text-red-700 mt-6"><i className="fas fa-trash"></i></button>
+                                    </div>
+                                  ))}
+                                  <button onClick={() => addFAQItem(pageType.key, pageData, formData, updateFormSection)} className="text-sm text-blue-600 hover:text-blue-800 font-medium"><i className="fas fa-plus mr-1"></i> 添加 FAQ</button>
+                                </div>
+                              )}
+                            </div>
 
                             {/* CTA 區域 */}
                             <div className="bg-white p-4 rounded-lg">
@@ -607,9 +747,31 @@ export default function ContentPage() {
                 <FormCheckbox label="顯示案例" checked={formData.cases?.enabled ?? true} onChange={(v: boolean) => updateFormSection("cases", { enabled: v })} />
                 {formData.cases?.enabled !== false && (
                   <div className="space-y-4 mt-6">
-                    <FormInput label="標籤" value={formData.cases?.tag || ""} onChange={(v: string) => updateFormSection("cases", { tag: v })} />
-                    <FormInput label="標題" value={formData.cases?.title || ""} onChange={(v: string) => updateFormSection("cases", { title: v })} />
-                    <FormTextarea label="描述" value={formData.cases?.description || ""} onChange={(v: string) => updateFormSection("cases", { description: v })} />
+                    <FormInput label="區域標籤" value={formData.cases?.sectionTagline || ""} onChange={(v: string) => updateFormSection("cases", { sectionTagline: v })} />
+                    <FormInput label="區域標題" value={formData.cases?.sectionTitle || ""} onChange={(v: string) => updateFormSection("cases", { sectionTitle: v })} />
+                    <FormTextarea label="區域描述" value={formData.cases?.sectionDescription || ""} onChange={(v: string) => updateFormSection("cases", { sectionDescription: v })} />
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                      <FormInput label="客戶標籤" value={formData.cases?.clientLabel || ""} onChange={(v: string) => updateFormSection("cases", { clientLabel: v })} />
+                      <FormInput label="查看詳情文字" value={formData.cases?.viewDetailsText || ""} onChange={(v: string) => updateFormSection("cases", { viewDetailsText: v })} />
+                      <FormInput label="查看更多文字" value={formData.cases?.viewMoreText || ""} onChange={(v: string) => updateFormSection("cases", { viewMoreText: v })} />
+                    </div>
+
+                    {/* 案例管理入口 */}
+                    <div className="border-t pt-4">
+                      <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 flex items-center justify-between">
+                        <div>
+                          <p className="text-sm font-medium text-gray-900">案例內容管理</p>
+                          <p className="text-sm text-gray-500">添加、編輯、刪除案例圖片與描述，請前往專門的案例管理頁面</p>
+                        </div>
+                        <a
+                          href="/admin/cases/"
+                          className="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-colors"
+                        >
+                          <i className="fas fa-external-link-alt mr-2"></i>
+                          前往案例管理
+                        </a>
+                      </div>
+                    </div>
                   </div>
                 )}
               </SectionEditor>
@@ -662,9 +824,10 @@ export default function ContentPage() {
                 <FormCheckbox label="顯示此區域" checked={formData.faq?.enabled ?? true} onChange={(v: boolean) => updateFormSection("faq", { enabled: v })} />
                 {formData.faq?.enabled !== false && (
                   <div className="space-y-6 mt-6">
-                    <FormInput label="標籤" value={formData.faq?.sectionTagline || ""} onChange={(v: string) => updateFormSection("faq", { sectionTagline: v })} />
-                    <FormInput label="標題" value={formData.faq?.sectionTitle || ""} onChange={(v: string) => updateFormSection("faq", { sectionTitle: v })} />
-                    
+                    <FormInput label="區域標籤" value={formData.faq?.sectionTagline || ""} onChange={(v: string) => updateFormSection("faq", { sectionTagline: v })} />
+                    <FormInput label="區域標題" value={formData.faq?.sectionTitle || ""} onChange={(v: string) => updateFormSection("faq", { sectionTitle: v })} />
+                    <FormTextarea label="區域描述" value={formData.faq?.sectionDescription || ""} onChange={(v: string) => updateFormSection("faq", { sectionDescription: v })} />
+
                     <div className="border-t pt-4">
                       <label className="block text-sm font-medium text-gray-700 mb-3">FAQ 項目</label>
                       <div className="space-y-3">
@@ -680,9 +843,36 @@ export default function ContentPage() {
                               newItems[index] = { ...item, answer: v };
                               updateFormSection("faq", { items: newItems });
                             }} className="mt-2" />
+                            <button
+                              onClick={() => {
+                                const newItems = (formData.faq?.items || []).filter((_: any, i: number) => i !== index);
+                                updateFormSection("faq", { items: newItems });
+                              }}
+                              className="mt-2 text-sm text-red-600 hover:text-red-800"
+                            >
+                              <i className="fas fa-trash mr-1"></i>刪除 FAQ
+                            </button>
                           </div>
                         ))}
                       </div>
+                      <button
+                        onClick={() => {
+                          const newItems = [...(formData.faq?.items || []), { question: "新問題", answer: "回答內容" }];
+                          updateFormSection("faq", { items: newItems });
+                        }}
+                        className="mt-3 text-sm text-blue-600 hover:text-blue-800 font-medium"
+                      >
+                        <i className="fas fa-plus mr-1"></i> 添加 FAQ
+                      </button>
+                    </div>
+
+                    <div className="border-t pt-4 bg-gray-50 p-4 rounded-lg">
+                      <h4 className="font-medium text-gray-700 mb-3">底部 CTA</h4>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <FormInput label="CTA 標題" value={formData.faq?.ctaTitle || ""} onChange={(v: string) => updateFormSection("faq", { ctaTitle: v })} />
+                        <FormInput label="CTA 按鈕文字" value={formData.faq?.ctaButtonText || ""} onChange={(v: string) => updateFormSection("faq", { ctaButtonText: v })} />
+                      </div>
+                      <FormTextarea label="CTA 描述" value={formData.faq?.ctaDescription || ""} onChange={(v: string) => updateFormSection("faq", { ctaDescription: v })} className="mt-2" />
                     </div>
                   </div>
                 )}
@@ -695,8 +885,59 @@ export default function ContentPage() {
                 <FormCheckbox label="顯示此區域" checked={formData.partners?.enabled ?? true} onChange={(v: boolean) => updateFormSection("partners", { enabled: v })} />
                 {formData.partners?.enabled !== false && (
                   <div className="space-y-6 mt-6">
-                    <FormInput label="標籤" value={formData.partners?.sectionTagline || ""} onChange={(v: string) => updateFormSection("partners", { sectionTagline: v })} />
-                    <FormInput label="標題" value={formData.partners?.sectionTitle || ""} onChange={(v: string) => updateFormSection("partners", { sectionTitle: v })} />
+                    <FormInput label="區域標籤" value={formData.partners?.sectionTagline || ""} onChange={(v: string) => updateFormSection("partners", { sectionTagline: v })} />
+                    <FormInput label="區域標題" value={formData.partners?.sectionTitle || ""} onChange={(v: string) => updateFormSection("partners", { sectionTitle: v })} />
+                    <FormTextarea label="區域描述" value={formData.partners?.sectionDescription || ""} onChange={(v: string) => updateFormSection("partners", { sectionDescription: v })} />
+
+                    <div className="border-t pt-4">
+                      <label className="block text-sm font-medium text-gray-700 mb-3">合作伙伴</label>
+                      <div className="space-y-3">
+                        {(formData.partners?.items || []).map((item: any, index: number) => (
+                          <div key={index} className="flex gap-2 items-center">
+                            <input
+                              type="text"
+                              value={item.name || ""}
+                              onChange={(e) => {
+                                const newItems = [...(formData.partners?.items || [])];
+                                newItems[index] = { ...item, name: e.target.value };
+                                updateFormSection("partners", { items: newItems });
+                              }}
+                              className="flex-1 px-3 py-2 text-sm border border-gray-200 rounded"
+                              placeholder="名稱"
+                            />
+                            <input
+                              type="text"
+                              value={item.icon || ""}
+                              onChange={(e) => {
+                                const newItems = [...(formData.partners?.items || [])];
+                                newItems[index] = { ...item, icon: e.target.value };
+                                updateFormSection("partners", { items: newItems });
+                              }}
+                              className="w-40 px-3 py-2 text-sm border border-gray-200 rounded"
+                              placeholder="FontAwesome 圖標"
+                            />
+                            <button
+                              onClick={() => {
+                                const newItems = (formData.partners?.items || []).filter((_: any, i: number) => i !== index);
+                                updateFormSection("partners", { items: newItems });
+                              }}
+                              className="text-red-500 hover:text-red-700 px-2"
+                            >
+                              <i className="fas fa-trash"></i>
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+                      <button
+                        onClick={() => {
+                          const newItems = [...(formData.partners?.items || []), { name: "新夥伴", icon: "fa-star" }];
+                          updateFormSection("partners", { items: newItems });
+                        }}
+                        className="mt-3 text-sm text-blue-600 hover:text-blue-800 font-medium"
+                      >
+                        <i className="fas fa-plus mr-1"></i> 添加夥伴
+                      </button>
+                    </div>
                   </div>
                 )}
               </SectionEditor>
@@ -749,21 +990,11 @@ export default function ContentPage() {
                 {formData.footer?.enabled !== false && (
                   <div className="space-y-6 mt-6">
                     <div className="bg-gray-50 p-4 rounded-lg">
-                      <h4 className="font-medium text-gray-700 mb-3">聯繫信息</h4>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <FormInput label="電話" value={formData.footer?.contact?.phone || ""} onChange={(v: string) => updateFormSection("footer", { contact: { ...formData.footer?.contact, phone: v } })} />
-                        <FormInput label="WhatsApp" value={formData.footer?.contact?.whatsapp || ""} onChange={(v: string) => updateFormSection("footer", { contact: { ...formData.footer?.contact, whatsapp: v } })} />
-                        <FormInput label="Email" value={formData.footer?.contact?.email || ""} onChange={(v: string) => updateFormSection("footer", { contact: { ...formData.footer?.contact, email: v } })} className="md:col-span-2" />
-                        <FormTextarea label="地址（英文）" value={formData.footer?.contact?.address || ""} onChange={(v: string) => updateFormSection("footer", { contact: { ...formData.footer?.contact, address: v } })} className="md:col-span-2" />
-                        <FormTextarea label="地址（中文）" value={formData.footer?.contact?.addressCn || ""} onChange={(v: string) => updateFormSection("footer", { contact: { ...formData.footer?.contact, addressCn: v } })} className="md:col-span-2" />
-                      </div>
-                    </div>
-                    
-                    <div className="bg-gray-50 p-4 rounded-lg">
                       <h4 className="font-medium text-gray-700 mb-3">社交媒體</h4>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <FormInput label="Facebook" value={formData.footer?.social?.facebook || ""} onChange={(v: string) => updateFormSection("footer", { social: { ...formData.footer?.social, facebook: v } })} />
                         <FormInput label="Instagram" value={formData.footer?.social?.instagram || ""} onChange={(v: string) => updateFormSection("footer", { social: { ...formData.footer?.social, instagram: v } })} />
+                        <FormInput label="WhatsApp" value={formData.footer?.social?.whatsapp || ""} onChange={(v: string) => updateFormSection("footer", { social: { ...formData.footer?.social, whatsapp: v } })} />
                       </div>
                     </div>
 
@@ -936,6 +1167,58 @@ export default function ContentPage() {
       </div>
     </div>
   );
+}
+
+// Features 項目管理
+function updateFeatureItem(pageKey: string, pageData: any, idx: number, field: string, value: string, formData: any, updateFormSection: (s: string, v: any) => void) {
+  const newItems = [...(pageData.features?.items || [])];
+  newItems[idx] = { ...newItems[idx], [field]: value };
+  updateServicePageSection(pageKey, pageData, "features", { ...pageData.features, items: newItems }, formData, updateFormSection);
+}
+
+function addFeatureItem(pageKey: string, pageData: any, formData: any, updateFormSection: (s: string, v: any) => void) {
+  const newItems = [...(pageData.features?.items || []), { icon: "fa-star", title: "新特色", description: "描述文字" }];
+  updateServicePageSection(pageKey, pageData, "features", { ...pageData.features, items: newItems }, formData, updateFormSection);
+}
+
+function removeFeatureItem(pageKey: string, pageData: any, idx: number, formData: any, updateFormSection: (s: string, v: any) => void) {
+  const newItems = (pageData.features?.items || []).filter((_: any, i: number) => i !== idx);
+  updateServicePageSection(pageKey, pageData, "features", { ...pageData.features, items: newItems }, formData, updateFormSection);
+}
+
+// Process 步驟管理
+function updateProcessStep(pageKey: string, pageData: any, idx: number, field: string, value: string, formData: any, updateFormSection: (s: string, v: any) => void) {
+  const newSteps = [...(pageData.process?.steps || [])];
+  newSteps[idx] = { ...newSteps[idx], [field]: value };
+  updateServicePageSection(pageKey, pageData, "process", { ...pageData.process, steps: newSteps }, formData, updateFormSection);
+}
+
+function addProcessStep(pageKey: string, pageData: any, formData: any, updateFormSection: (s: string, v: any) => void) {
+  const nextNum = (pageData.process?.steps || []).length + 1;
+  const newSteps = [...(pageData.process?.steps || []), { number: String(nextNum), title: `步驟 ${nextNum}`, description: "描述文字" }];
+  updateServicePageSection(pageKey, pageData, "process", { ...pageData.process, steps: newSteps }, formData, updateFormSection);
+}
+
+function removeProcessStep(pageKey: string, pageData: any, idx: number, formData: any, updateFormSection: (s: string, v: any) => void) {
+  const newSteps = (pageData.process?.steps || []).filter((_: any, i: number) => i !== idx);
+  updateServicePageSection(pageKey, pageData, "process", { ...pageData.process, steps: newSteps }, formData, updateFormSection);
+}
+
+// FAQ 項目管理
+function updateFAQItem(pageKey: string, pageData: any, idx: number, field: string, value: string, formData: any, updateFormSection: (s: string, v: any) => void) {
+  const newItems = [...(pageData.faq?.items || [])];
+  newItems[idx] = { ...newItems[idx], [field]: value };
+  updateServicePageSection(pageKey, pageData, "faq", { ...pageData.faq, items: newItems }, formData, updateFormSection);
+}
+
+function addFAQItem(pageKey: string, pageData: any, formData: any, updateFormSection: (s: string, v: any) => void) {
+  const newItems = [...(pageData.faq?.items || []), { question: "新問題", answer: "回答內容" }];
+  updateServicePageSection(pageKey, pageData, "faq", { ...pageData.faq, items: newItems }, formData, updateFormSection);
+}
+
+function removeFAQItem(pageKey: string, pageData: any, idx: number, formData: any, updateFormSection: (s: string, v: any) => void) {
+  const newItems = (pageData.faq?.items || []).filter((_: any, i: number) => i !== idx);
+  updateServicePageSection(pageKey, pageData, "faq", { ...pageData.faq, items: newItems }, formData, updateFormSection);
 }
 
 // Stats 項目管理

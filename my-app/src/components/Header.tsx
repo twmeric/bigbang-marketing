@@ -59,7 +59,7 @@ export default function Header() {
         {
           icon: "fab fa-whatsapp",
           href: `https://wa.me/${
-            cmsData.footer.contact?.whatsapp?.replace(/\s/g, "") || "85252768052"
+            (cmsData.contact?.whatsappNumber || "5276 8052").replace(/\s/g, "")
           }`,
           label: "WhatsApp",
         },
@@ -175,9 +175,9 @@ export default function Header() {
                     onMouseEnter={() => setDesktopServicesOpen(true)}
                     onMouseLeave={() => setDesktopServicesOpen(false)}
                   >
-                    {link.children?.map((subItem: {name: string, href: string}) => (
+                    {link.children?.map((subItem: {name?: string, label?: string, href: string}) => (
                       <a
-                        key={subItem.name}
+                        key={subItem.name || subItem.label || subItem.href}
                         href={subItem.href}
                         className={`flex items-center px-4 py-3 transition-colors text-sm ${
                           isActive(subItem.href)
@@ -189,7 +189,7 @@ export default function Header() {
                           <i className="fas fa-check mr-2 text-xs"></i>
                         )}
                         <span className={isActive(subItem.href) ? "" : "ml-4"}>
-                          {subItem.name}
+                          {subItem.name || subItem.label}
                         </span>
                       </a>
                     ))}

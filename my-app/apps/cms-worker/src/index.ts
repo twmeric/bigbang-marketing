@@ -161,7 +161,31 @@ async function saveCMSData(request: Request, env: Env, corsHeaders: Record<strin
       return jsonResponse({ success: false, error: 'Invalid data' }, 400, corsHeaders);
     }
     
-    const dataToSave = { ...data, lastUpdated: new Date().toISOString() };
+    // Deep merge with existing KV data to avoid losing other sections
+    let existingData: any = {};
+    try {
+      const kvData = await env.CMS_DATA.get('cms_data', 'json');
+      if (kvData && typeof kvData === 'object') {
+        existingData = kvData;
+      }
+    } catch (e) {}
+    
+    const deepMerge = (target: any, source: any) => {
+      for (const key in source) {
+        if (source[key] && typeof source[key] === 'object' && !Array.isArray(source[key])) {
+          if (!target[key] || typeof target[key] !== 'object' || Array.isArray(target[key])) {
+            target[key] = {};
+          }
+          deepMerge(target[key], source[key]);
+        } else {
+          target[key] = source[key];
+        }
+      }
+      return target;
+    };
+    
+    const mergedData = deepMerge(JSON.parse(JSON.stringify(existingData)), data);
+    const dataToSave = { ...mergedData, lastUpdated: new Date().toISOString() };
     await env.CMS_DATA.put('cms_data', JSON.stringify(dataToSave));
     
     const timestamp = new Date().toISOString();
@@ -189,9 +213,6 @@ async function deployWebsite(request: Request, env: Env, corsHeaders: Record<str
     const githubToken = env.GITHUB_TOKEN;
     const githubRepo = env.GITHUB_REPO || 'jimsbond/bigbang-marketing';
     
-    // Debug info (mask token for security)
-    const tokenPrefix = githubToken ? githubToken.substring(0, 4) + '****' : 'NOT SET';
-    
     if (!githubToken) {
       return jsonResponse({ 
         success: false, 
@@ -207,25 +228,42 @@ async function deployWebsite(request: Request, env: Env, corsHeaders: Record<str
       if (body.reason) reason = body.reason;
     } catch (e) {}
     
-    const response = await fetch(
-      `https://api.github.com/repos/${githubRepo}/actions/workflows/deploy.yml/dispatches`,
-      {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${githubToken}`,
-          'Accept': 'application/vnd.github.v3+json',
-          'Content-Type': 'application/json',
-          'User-Agent': 'BigBang-CMS',
-          'X-GitHub-Api-Version': '2022-11-28',
-        },
-        body: JSON.stringify({
-          ref: 'main',
-          inputs: { 
-            reason: `${reason} - ${new Date().toLocaleString('zh-HK')}` 
+    async function triggerDeploy(inputs?: Record<string, string>) {
+      return fetch(
+        `https://api.github.com/repos/${githubRepo}/actions/workflows/deploy.yml/dispatches`,
+        {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${githubToken}`,
+            'Accept': 'application/vnd.github.v3+json',
+            'Content-Type': 'application/json',
+            'User-Agent': 'BigBang-CMS',
+            'X-GitHub-Api-Version': '2022-11-28',
           },
-        }),
+          body: JSON.stringify({
+            ref: 'main',
+            ...(inputs && { inputs }),
+          }),
+        }
+      );
+    }
+    
+    let response = await triggerDeploy({ 
+      reason: `${reason} - ${new Date().toLocaleString('zh-HK')}` 
+    });
+
+    // If GitHub rejects inputs, retry without inputs
+    if (response.status !== 204) {
+      let errorMsg = '';
+      try {
+        const errorData = await response.clone().json() as { message?: string };
+        errorMsg = errorData.message || '';
+      } catch (e) {}
+      
+      if (errorMsg.includes('Unexpected inputs')) {
+        response = await triggerDeploy();
       }
-    );
+    }
 
     if (response.status === 204) {
       return jsonResponse({ 
@@ -259,6 +297,8 @@ async function deployWebsite(request: Request, env: Env, corsHeaders: Record<str
       helpText = 'GitHub token is invalid or expired. Please generate a new token at https://github.com/settings/tokens';
     } else if (response.status === 403) {
       helpText = 'GitHub token does not have permission to trigger workflows. Please ensure it has "repo" and "workflow" scopes.';
+    } else if (errorMsg.includes('Unexpected inputs')) {
+      helpText = 'GitHub Actions workflow "deploy.yml" does not accept "reason" input. Please add workflow_dispatch.inputs.reason to .github/workflows/deploy.yml, or update the CMS Worker to not send inputs.';
     }
 
     return jsonResponse({ 

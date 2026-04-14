@@ -1,35 +1,74 @@
-name: Build and Deploy
+name: Deploy to Cloudflare
 
 on:
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: 'Deployment reason'
+        required: false
+        default: 'Manual deployment'
   push:
     branches: [main]
-  workflow_dispatch:
 
 jobs:
-  build-and-deploy:
+  deploy-web:
+    name: Deploy Web to Pages
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: my-app
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
 
-      - name: Build
-        working-directory: my-app
-        run: |
-          npm install
-          npm run fetch-cms
-          npm run build
-        env:
-          NEXT_PUBLIC_CMS_API_URL: ${{ secrets.CMS_API_URL }}
+      - name: Install dependencies
+        run: npm install
 
-      - name: Deploy to Cloudflare
+      - name: Fetch CMS data
+        run: npm run fetch-cms
+        env:
+          NEXT_PUBLIC_CMS_API_URL: ${{ secrets.CMS_API_URL || 'https://bigbang-marketing-cms.jimsbond007.workers.dev' }}
+        continue-on-error: true
+
+      - name: Build
+        run: npm run build
+        env:
+          NEXT_PUBLIC_CMS_API_URL: ${{ secrets.CMS_API_URL || 'https://bigbang-marketing-cms.jimsbond007.workers.dev' }}
+
+      - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
         with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           workingDirectory: my-app
           command: pages deploy dist --project-name=bigbang-marketing --branch=main
+
+  deploy-worker:
+    name: Deploy Worker
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: my-app/apps/cms-worker
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Deploy Worker
+        uses: cloudflare/wrangler-action@v3
+        with:
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          workingDirectory: my-app/apps/cms-worker

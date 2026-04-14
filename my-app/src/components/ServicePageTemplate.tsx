@@ -64,7 +64,7 @@ export default function ServicePageTemplate({ pageKey }: ServicePageTemplateProp
     "provider": {
       "@type": "Organization",
       "name": geo.provider,
-      "url": "https://bigbang.jkdcoding.com"
+      "url": "https://www.bigbangmarketing.hk"
     },
     "description": geo.description,
     "offers": {
