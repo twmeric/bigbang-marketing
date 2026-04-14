@@ -104,6 +104,7 @@ export interface FAQSectionData {
   ctaTitle: string;
   ctaDescription: string;
   ctaButtonText: string;
+  ctaButtonLink: string;
 }
 
 export interface PartnerItem {

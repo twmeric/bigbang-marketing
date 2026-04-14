@@ -10,13 +10,13 @@
   "hero": {
     "enabled": true,
     "backgroundImage": "/hero-background.jpg",
-    "titleLine1": "Ignite Your Brand.",
+    "titleLine1": "Ignite Your Brand",
     "titleLine2": "Expand Your Universe",
     "titleLine2Color": "#facc15",
     "subtitle": "市場推廣及市場策劃",
     "description": "從策略到內容，一站式AI行銷及線下推廣服務，讓品牌脫穎而出。",
     "buttonText": "Contact Us",
-    "buttonLink": "mailto:info@bigbangmarketing.hk"
+    "buttonLink": "https://wa.me/85252768052"
   },
   "about": {
     "enabled": true,
@@ -415,7 +415,7 @@
         "description": "透過專業的 SEO 策略，提升您的網站在 Google 等搜索引擎的排名，吸引更多自然流量，讓潛在客戶更容易找到您。",
         "backgroundImage": "/hero-background.jpg",
         "buttonText": "免費諮詢",
-        "buttonLink": "#contact"
+        "buttonLink": "https://wa.me/85252768052"
       },
       "features": {
         "title": "我們的 SEO 服務特色",
@@ -499,7 +499,7 @@
         "title": "準備好提升您的搜尋排名了嗎？",
         "description": "立即聯繫我們，獲取免費的 SEO 諮詢服務。",
         "buttonText": "立即開始",
-        "buttonLink": "#contact"
+        "buttonLink": "https://wa.me/85252768052"
       },
       "faq": {
         "enabled": true,
@@ -908,5 +908,5 @@
       }
     }
   },
-  "lastUpdated": "2026-04-13T04:06:10.559Z"
+  "lastUpdated": "2026-04-14T05:00:39.112Z"
 }

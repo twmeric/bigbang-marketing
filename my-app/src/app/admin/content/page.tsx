@@ -922,6 +922,7 @@ export default function ContentPage() {
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <FormInput label="CTA 標題" value={formData.faq?.ctaTitle || ""} onChange={(v: string) => updateFormSection("faq", { ctaTitle: v })} />
                         <FormInput label="CTA 按鈕文字" value={formData.faq?.ctaButtonText || ""} onChange={(v: string) => updateFormSection("faq", { ctaButtonText: v })} />
+                        <FormInput label="CTA 按鈕連結" value={formData.faq?.ctaButtonLink || ""} onChange={(v: string) => updateFormSection("faq", { ctaButtonLink: v })} className="md:col-span-2" />
                       </div>
                       <FormTextarea label="CTA 描述" value={formData.faq?.ctaDescription || ""} onChange={(v: string) => updateFormSection("faq", { ctaDescription: v })} className="mt-2" />
                     </div>

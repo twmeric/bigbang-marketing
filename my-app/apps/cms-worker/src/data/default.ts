@@ -166,6 +166,7 @@ export const defaultCMSData = {
     ctaTitle: "還有其他問題嗎？",
     ctaDescription: "我們的成長營銷專家隨時準備解答您的疑問，幫您制定最適合的營銷策略。",
     ctaButtonText: "聯絡我們",
+    ctaButtonLink: "https://wa.me/85252768052",
   },
   partners: {
     enabled: true,

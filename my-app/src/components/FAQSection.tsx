@@ -54,6 +54,7 @@ const defaultFaq = {
   ctaTitle: "還有其他問題嗎？",
   ctaDescription: "我們的成長營銷專家隨時準備解答您的疑問，幫您制定最適合的營銷策略。",
   ctaButtonText: "聯絡我們",
+  ctaButtonLink: "https://wa.me/85252768052",
 };
 
 export default function FAQSection() {
@@ -158,7 +159,7 @@ export default function FAQSection() {
               {faq.ctaDescription}
             </p>
             <a
-              href="https://wa.me/85252768052"
+              href={faq.ctaButtonLink || "https://wa.me/85252768052"}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center bg-yellow-400 hover:bg-yellow-500 text-gray-900 px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 hover:scale-105 shadow-lg"
