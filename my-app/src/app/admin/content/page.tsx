@@ -772,12 +772,6 @@ export default function ContentPage() {
                     <FormInput label="區域標籤" value={formData.cases?.sectionTagline || ""} onChange={(v: string) => updateFormSection("cases", { sectionTagline: v })} />
                     <FormInput label="區域標題" value={formData.cases?.sectionTitle || ""} onChange={(v: string) => updateFormSection("cases", { sectionTitle: v })} />
                     <FormTextarea label="區域描述" value={formData.cases?.sectionDescription || ""} onChange={(v: string) => updateFormSection("cases", { sectionDescription: v })} />
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                      <FormInput label="客戶標籤" value={formData.cases?.clientLabel || ""} onChange={(v: string) => updateFormSection("cases", { clientLabel: v })} />
-                      <FormInput label="查看詳情文字" value={formData.cases?.viewDetailsText || ""} onChange={(v: string) => updateFormSection("cases", { viewDetailsText: v })} />
-                      <FormInput label="查看更多文字" value={formData.cases?.viewMoreText || ""} onChange={(v: string) => updateFormSection("cases", { viewMoreText: v })} />
-                    </div>
-
                     {/* 案例管理入口 */}
                     <div className="border-t pt-4">
                       <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 flex items-center justify-between">

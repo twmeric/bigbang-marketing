@@ -102,9 +102,6 @@ export const defaultCMSData = {
     sectionTagline: "Our Work",
     sectionTitle: "成功案例",
     sectionDescription: "我們為各大品牌提供專業的營銷服務，創造卓越的市場成果",
-    clientLabel: "客戶：",
-    viewDetailsText: "查看詳情",
-    viewMoreText: "查看更多案例",
     items: [
       {
         id: 1,

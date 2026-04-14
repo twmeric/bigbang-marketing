@@ -19,9 +19,6 @@ export default function CasesSection() {
     sectionTagline: "Our Work",
     sectionTitle: "成功案例",
     sectionDescription: "我們為各大品牌提供專業的營銷服務，創造卓越的市場成果",
-    clientLabel: "客戶：",
-    viewDetailsText: "查看詳情",
-    viewMoreText: "查看更多案例",
     items: [],
   };
   const cases = { ...defaultCases, ...(cmsData?.cases || {}) };
@@ -103,7 +100,7 @@ export default function CasesSection() {
               {/* Content */}
               <div className="p-6">
                 <p className="text-yellow-400 text-sm font-semibold mb-2">
-                  {cases.clientLabel}{caseItem.client}
+                  客戶：{caseItem.client}
                 </p>
                 <h3 className="text-xl font-bold mb-3 line-clamp-2">
                   {caseItem.title}
@@ -111,10 +108,6 @@ export default function CasesSection() {
                 <p className="text-gray-400 text-sm leading-relaxed mb-4">
                   {caseItem.description}
                 </p>
-                <button className="inline-flex items-center text-yellow-400 font-semibold hover:text-yellow-300 transition-colors">
-                  {cases.viewDetailsText}
-                  <i className="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
-                </button>
               </div>
             </div>
           ))}
@@ -128,7 +121,7 @@ export default function CasesSection() {
             rel="noopener noreferrer"
             className="inline-flex items-center bg-yellow-400 hover:bg-yellow-500 text-gray-900 px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 hover:scale-105"
           >
-            {cases.viewMoreText}
+            查看更多案例
             <i className="fas fa-arrow-right ml-2"></i>
           </a>
         </div>
