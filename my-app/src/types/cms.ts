@@ -65,6 +65,8 @@ export interface CasesSectionData {
   sectionTagline: string;
   sectionTitle: string;
   sectionDescription: string;
+  ctaText: string;
+  ctaLink: string;
   items: CaseItem[];
 }
 

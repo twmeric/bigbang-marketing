@@ -149,7 +149,9 @@
         "category": "KOL推廣",
         "description": "為美容院客戶邀請到嘉嘉及羅毓儀Yuki做Grand Opening 剪彩嘉賓，大約香港95%娛記前來採訪，全部也有出Post報導，客戶表示非常滿意，更成功邀請Yuki作為廣告代言人。"
       }
-    ]
+    ],
+    "ctaText": "查看更多案例",
+    "ctaLink": "https://wa.me/85252768052"
   },
   "growth": {
     "enabled": true,
@@ -921,5 +923,5 @@
       }
     }
   },
-  "lastUpdated": "2026-04-14T06:54:45.550Z"
+  "lastUpdated": "2026-04-14T07:18:45.789Z"
 }

@@ -19,6 +19,8 @@ export default function CasesSection() {
     sectionTagline: "Our Work",
     sectionTitle: "成功案例",
     sectionDescription: "我們為各大品牌提供專業的營銷服務，創造卓越的市場成果",
+    ctaText: "查看更多案例",
+    ctaLink: "https://wa.me/85252768052",
     items: [],
   };
   const cases = { ...defaultCases, ...(cmsData?.cases || {}) };
@@ -116,12 +118,12 @@ export default function CasesSection() {
         {/* View More Button */}
         <div className="text-center mt-12 animate-item">
           <a
-            href="https://wa.me/85252768052"
+            href={cases.ctaLink}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center bg-yellow-400 hover:bg-yellow-500 text-gray-900 px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 hover:scale-105"
           >
-            查看更多案例
+            {cases.ctaText}
             <i className="fas fa-arrow-right ml-2"></i>
           </a>
         </div>

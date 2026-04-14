@@ -102,6 +102,8 @@ export const defaultCMSData = {
     sectionTagline: "Our Work",
     sectionTitle: "成功案例",
     sectionDescription: "我們為各大品牌提供專業的營銷服務，創造卓越的市場成果",
+    ctaText: "查看更多案例",
+    ctaLink: "https://wa.me/85252768052",
     items: [
       {
         id: 1,
