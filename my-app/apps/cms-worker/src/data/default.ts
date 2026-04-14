@@ -304,7 +304,7 @@ export const defaultCMSData = {
         quote: "Big Bang Marketing 的 SEO 服務讓我們的網站流量在3個月內提升了400%，業績也隨之翻倍。",
         author: "陳先生",
         role: "電商品牌總監",
-        avatar: "/images/testimonial-1.jpg",
+        avatar: "",
       },
       process: {
         title: "我們的 SEO 流程",
@@ -365,7 +365,7 @@ export const defaultCMSData = {
         quote: "他們的內容策略讓我們的品牌故事被更多人看見，社群互動率提升了5倍。",
         author: "林小姐",
         role: "品牌行銷經理",
-        avatar: "/images/testimonial-2.jpg",
+        avatar: "",
       },
       cta: {
         title: "用內容打動您的客戶",
@@ -409,7 +409,7 @@ export const defaultCMSData = {
         quote: "他們策劃的快閃活動讓我們的產品在一天內被搶購一空，效果超出預期。",
         author: "黃先生",
         role: "零售品牌總經理",
-        avatar: "/images/testimonial-3.jpg",
+        avatar: "",
       },
       cta: {
         title: "打造難忘的線下體驗",
@@ -453,7 +453,7 @@ export const defaultCMSData = {
         quote: "KOL 合作讓我們的新品在上市首週就創下銷售記錄，ROI 達到 500%。",
         author: "張小姐",
         role: "美妝品牌行銷總監",
-        avatar: "/images/testimonial-4.jpg",
+        avatar: "",
       },
       cta: {
         title: "找到最適合的 KOL 夥伴",
@@ -497,7 +497,7 @@ export const defaultCMSData = {
         quote: "新網站上線後，我們的詢問量增加了300%，客戶都稱讚網站設計專業。",
         author: "王先生",
         role: "B2B 企業負責人",
-        avatar: "/images/testimonial-5.jpg",
+        avatar: "",
       },
       techStack: {
         enabled: true,
@@ -554,7 +554,7 @@ export const defaultCMSData = {
         quote: "新包裝設計讓我們的產品在通路中脫穎而出，銷售量成長了50%。",
         author: "李小姐",
         role: "食品品牌創辦人",
-        avatar: "/images/testimonial-6.jpg",
+        avatar: "",
       },
       cta: {
         title: "讓產品包裝說話",

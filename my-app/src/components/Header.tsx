@@ -90,13 +90,16 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Normalize pathname for comparison (remove trailing slash)
+  const normalizedPathname = pathname?.replace(/\/$/, "") || "";
+
   // Check if link is current page
   const isActive = (href: string): boolean => {
     if (href === "/") {
-      return pathname === "/";
+      return normalizedPathname === "" || normalizedPathname === "/";
     }
     if (href.startsWith("/") && href.length > 1) {
-      return pathname === href || pathname.startsWith(href);
+      return normalizedPathname === href || normalizedPathname.startsWith(href);
     }
     return false;
   };
@@ -111,7 +114,7 @@ export default function Header() {
       "/web-design",
       "/packaging-design",
     ];
-    return servicePages.some((path) => pathname === path);
+    return servicePages.some((path) => normalizedPathname === path);
   };
 
   // Check if navigation item has dropdown
