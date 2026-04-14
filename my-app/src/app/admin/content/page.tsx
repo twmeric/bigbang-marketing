@@ -785,7 +785,10 @@ export default function ContentPage() {
                   <div className="space-y-6 mt-6">
                     <FormInput label="標籤" value={formData.growth?.sectionTagline || ""} onChange={(v: string) => updateFormSection("growth", { sectionTagline: v })} />
                     <FormInput label="標題" value={formData.growth?.sectionTitle || ""} onChange={(v: string) => updateFormSection("growth", { sectionTitle: v })} />
-                    <FormTextarea label="描述" value={formData.growth?.sectionDescription || ""} onChange={(v: string) => updateFormSection("growth", { sectionDescription: v })} />
+                    <FormTextarea label="引言段落 1" value={formData.growth?.introParagraph1 || ""} onChange={(v: string) => updateFormSection("growth", { introParagraph1: v })} />
+                    <FormTextarea label="引言段落 2" value={formData.growth?.introParagraph2 || ""} onChange={(v: string) => updateFormSection("growth", { introParagraph2: v })} />
+                    <FormInput label="策略區域標題" value={formData.growth?.strategiesTitle || ""} onChange={(v: string) => updateFormSection("growth", { strategiesTitle: v })} />
+                    <FormTextarea label="策略區域描述" value={formData.growth?.strategiesDescription || ""} onChange={(v: string) => updateFormSection("growth", { strategiesDescription: v })} />
                     
                     <div className="border-t pt-4">
                       <label className="block text-sm font-medium text-gray-700 mb-3">策略項目</label>
@@ -809,8 +812,34 @@ export default function ContentPage() {
                               newStrategies[index] = { ...strategy, description: v };
                               updateFormSection("growth", { strategies: newStrategies });
                             }} className="mt-2" />
+                            <button
+                              onClick={() => {
+                                const newStrategies = (formData.growth?.strategies || []).filter((_: any, i: number) => i !== index);
+                                updateFormSection("growth", { strategies: newStrategies });
+                              }}
+                              className="mt-2 text-sm text-red-600 hover:text-red-800"
+                            >
+                              <i className="fas fa-trash mr-1"></i>刪除策略
+                            </button>
                           </div>
                         ))}
+                        <button
+                          onClick={() => {
+                            const newStrategies = [...(formData.growth?.strategies || []), { icon: "star", title: "新策略", description: "描述文字" }];
+                            updateFormSection("growth", { strategies: newStrategies });
+                          }}
+                          className="text-sm text-blue-600 hover:text-blue-800 font-medium"
+                        >
+                          <i className="fas fa-plus mr-1"></i> 添加策略
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className="border-t pt-4 bg-gray-50 p-4 rounded-lg">
+                      <h4 className="font-medium text-gray-700 mb-3">底部 CTA</h4>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <FormInput label="CTA 文字" value={formData.growth?.ctaText || ""} onChange={(v: string) => updateFormSection("growth", { ctaText: v })} />
+                        <FormInput label="CTA 連結" value={formData.growth?.ctaLink || ""} onChange={(v: string) => updateFormSection("growth", { ctaLink: v })} />
                       </div>
                     </div>
                   </div>
@@ -974,8 +1003,20 @@ export default function ContentPage() {
                         <FormInput label="姓名提示" value={formData.contact?.form?.namePlaceholder || ""} onChange={(v: string) => updateFormSection("contact", { form: { ...formData.contact?.form, namePlaceholder: v } })} />
                         <FormInput label="電話標籤" value={formData.contact?.form?.phoneLabel || ""} onChange={(v: string) => updateFormSection("contact", { form: { ...formData.contact?.form, phoneLabel: v } })} />
                         <FormInput label="電話提示" value={formData.contact?.form?.phonePlaceholder || ""} onChange={(v: string) => updateFormSection("contact", { form: { ...formData.contact?.form, phonePlaceholder: v } })} />
+                        <FormInput label="Email 標籤" value={formData.contact?.form?.emailLabel || ""} onChange={(v: string) => updateFormSection("contact", { form: { ...formData.contact?.form, emailLabel: v } })} />
+                        <FormInput label="Email 提示" value={formData.contact?.form?.emailPlaceholder || ""} onChange={(v: string) => updateFormSection("contact", { form: { ...formData.contact?.form, emailPlaceholder: v } })} />
+                        <FormInput label="服務標籤" value={formData.contact?.form?.serviceLabel || ""} onChange={(v: string) => updateFormSection("contact", { form: { ...formData.contact?.form, serviceLabel: v } })} />
+                        <FormInput label="服務提示" value={formData.contact?.form?.servicePlaceholder || ""} onChange={(v: string) => updateFormSection("contact", { form: { ...formData.contact?.form, servicePlaceholder: v } })} />
+                        <FormInput label="留言標籤" value={formData.contact?.form?.messageLabel || ""} onChange={(v: string) => updateFormSection("contact", { form: { ...formData.contact?.form, messageLabel: v } })} />
+                        <FormInput label="留言提示" value={formData.contact?.form?.messagePlaceholder || ""} onChange={(v: string) => updateFormSection("contact", { form: { ...formData.contact?.form, messagePlaceholder: v } })} />
                         <FormInput label="提交按鈕" value={formData.contact?.form?.submitButton || ""} onChange={(v: string) => updateFormSection("contact", { form: { ...formData.contact?.form, submitButton: v } })} />
+                        <FormInput label="提交中文字" value={formData.contact?.form?.submittingText || ""} onChange={(v: string) => updateFormSection("contact", { form: { ...formData.contact?.form, submittingText: v } })} />
                         <FormInput label="成功標題" value={formData.contact?.form?.successTitle || ""} onChange={(v: string) => updateFormSection("contact", { form: { ...formData.contact?.form, successTitle: v } })} />
+                        <FormInput label="成功訊息" value={formData.contact?.form?.successMessage || ""} onChange={(v: string) => updateFormSection("contact", { form: { ...formData.contact?.form, successMessage: v } })} />
+                        <FormInput label="成功按鈕" value={formData.contact?.form?.successButton || ""} onChange={(v: string) => updateFormSection("contact", { form: { ...formData.contact?.form, successButton: v } })} />
+                        <FormInput label="錯誤標題" value={formData.contact?.form?.errorMessage || ""} onChange={(v: string) => updateFormSection("contact", { form: { ...formData.contact?.form, errorMessage: v } })} />
+                        <FormInput label="錯誤詳情" value={formData.contact?.form?.errorDetail || ""} onChange={(v: string) => updateFormSection("contact", { form: { ...formData.contact?.form, errorDetail: v } })} />
+                        <FormInput label="表單腳註" value={formData.contact?.form?.footnote || ""} onChange={(v: string) => updateFormSection("contact", { form: { ...formData.contact?.form, footnote: v } })} />
                       </div>
                     </div>
                   </div>
@@ -989,6 +1030,12 @@ export default function ContentPage() {
                 <FormCheckbox label="顯示頁腳" checked={formData.footer?.enabled ?? true} onChange={(v: boolean) => updateFormSection("footer", { enabled: v })} />
                 {formData.footer?.enabled !== false && (
                   <div className="space-y-6 mt-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <FormInput label="公司名稱" value={formData.footer?.companyName || ""} onChange={(v: string) => updateFormSection("footer", { companyName: v })} />
+                      <FormInput label="版權信息" value={formData.footer?.copyright || ""} onChange={(v: string) => updateFormSection("footer", { copyright: v })} />
+                    </div>
+                    <FormTextarea label="公司描述" value={formData.footer?.companyDescription || ""} onChange={(v: string) => updateFormSection("footer", { companyDescription: v })} />
+
                     <div className="bg-gray-50 p-4 rounded-lg">
                       <h4 className="font-medium text-gray-700 mb-3">社交媒體</h4>
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

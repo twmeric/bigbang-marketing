@@ -208,6 +208,7 @@ if (!cases.enabled) return null;
 - [ ] `cms-worker/src/data/default.ts` 包含完整預設資料，欄位名與型別一致。
 - [ ] Worker `saveCMSData` 使用 Deep Merge，不是直接覆蓋。
 - [ ] Admin `onChange` 的欄位名稱與 `default.ts` 100% 對齊（特別注意 `label` vs `name`）。
+- [ ] Admin 表單**無遺漏也無多餘欄位**：對照 `types/cms.ts` 逐條確認每個字段都有輸入框。
 - [ ] 組件使用安全的 Fallback 寫法（`{ ...defaults, ...cmsData.section }`）。
 - [ ] Admin UI 無重複編輯入口（如案例只在 `/admin/cases` 管理）。
 - [ ] 所有圖片在 `public/` 中，CMS 路徑以 `/` 開頭。
@@ -255,6 +256,23 @@ if (!cases.enabled) return null;
    - 後果：CWMNG 不同步，某個環節出錯時難以定位。
    - ✅ 修正：任何結構變更同時改 Component、Worker、Admin、TypeScript、KV。
 
+8. ❌ **Admin 表單遺漏欄位**
+   - 後果：用戶在 Admin 中看不到某些內容的編輯入口，誤以為 CMS 不完整。
+   - 典型案例：
+     - `growth` 缺少 `introParagraph1`、`introParagraph2`、`strategiesTitle`、`strategiesDescription`、`ctaText`、`ctaLink`。
+     - `contact.form` 缺少 `emailLabel`、`serviceOptions`、`messagePlaceholder`、`submittingText`、`successMessage`、`errorDetail`、`footnote` 等。
+     - `footer` 缺少 `companyName`、`companyDescription`。
+   - ✅ 修正：建立 Admin 表單時，必須對照 `types/cms.ts` 的 **每一個字段**，逐條檢查是否有對應的輸入框。禁止憑記憶寫表單。
+
+9. ❌ **Admin 表單存在錯誤欄位**
+   - 後果：組件不消費該欄位，用戶編輯後無效。
+   - 典型案例：`growth` 的 Admin 表單錯誤地放了一個 `sectionDescription`，但 `GrowthSectionData` 根本沒有這個欄位。
+   - ✅ 修正：Admin 中只應出現組件和型別中**確實存在**的欄位，多一個、少一個都不行。
+
+10. ❌ **本地修改未推送到 GitHub `main` 分支**
+    - 後果：GitHub Actions 使用的是舊程式碼，導致構建錯誤與本地不一致；或 Workflow 只部署 Pages 不部署 Worker，導致前端與後端版本錯位。
+    - ✅ 修正：每次修復後必須 `git commit` 並 `git push origin main`。Workflow 必須同時包含 `deploy-web`（Pages）和 `deploy-worker`（Worker）兩個 job。
+
 ---
 
 ## 6. 啟動指令（Step-by-Step Action Plan）
@@ -286,9 +304,12 @@ if (!cases.enabled) return null;
 
 ### Phase 5：部署與驗證（20 分鐘）
 16. 將完整 `default.ts` 資料寫入 KV `cms_data`。
-17. 部署 Worker：`npx wrangler deploy`。
-18. 部署 Pages：`npx wrangler pages deploy dist --project-name=xxx`。
-19. 登入 Admin，修改一個欄位，保存，刷新，確認：
+17. **本地手動部署驗證**（在 GitHub Actions 修復前使用）：
+    - 部署 Worker：`cd apps/cms-worker && npx wrangler deploy`
+    - 部署 Pages：`cd my-app && npm run build && npx wrangler pages deploy dist --project-name=xxx`
+18. **推送至 GitHub**：`git add -A && git commit -m "fix: ..." && git push origin main`
+19. 檢查 GitHub Actions：確認 `.github/workflows/deploy.yml` 最新 run 為 **綠色 passed**，且同時執行了 `deploy-web` 與 `deploy-worker`。
+20. 登入 Admin，修改一個欄位，保存，刷新，確認：
     - 修改持久化
     - **其他 Section 未被清空**
     - 網站無閃屏
