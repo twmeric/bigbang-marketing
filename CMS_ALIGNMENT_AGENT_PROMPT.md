@@ -262,6 +262,7 @@ if (!cases.enabled) return null;
      - `growth` 缺少 `introParagraph1`、`introParagraph2`、`strategiesTitle`、`strategiesDescription`、`ctaText`、`ctaLink`。
      - `contact.form` 缺少 `emailLabel`、`serviceOptions`、`messagePlaceholder`、`submittingText`、`successMessage`、`errorDetail`、`footnote` 等。
      - `footer` 缺少 `companyName`、`companyDescription`。
+     - **Service Pages 缺少 `pageTitle`、`pageDescription`、`cta.buttonLink`**：子頁面的巢狀物件最容易被忽略，必須逐層檢查 `hero`、`features`、`process`、`cta`、`faq` 的每一個字段。
    - ✅ 修正：建立 Admin 表單時，必須對照 `types/cms.ts` 的 **每一個字段**，逐條檢查是否有對應的輸入框。禁止憑記憶寫表單。
 
 9. ❌ **Admin 表單存在錯誤欄位**

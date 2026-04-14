@@ -508,12 +508,29 @@ export default function ContentPage() {
                         
                         {pageData.enabled !== false && (
                           <div className="space-y-6 mt-4">
+                            {/* 頁面元數據 */}
+                            <div className="bg-white p-4 rounded-lg">
+                              <h4 className="font-medium text-gray-700 mb-3">頁面元數據</h4>
+                              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <FormInput 
+                                  label="頁面標題 (SEO)" 
+                                  value={pageData.pageTitle || ""} 
+                                  onChange={(v: string) => updateServicePageSection(pageType.key, pageData, "pageTitle", v, formData, updateFormSection)} 
+                                />
+                                <FormInput 
+                                  label="頁面描述 (SEO)" 
+                                  value={pageData.pageDescription || ""} 
+                                  onChange={(v: string) => updateServicePageSection(pageType.key, pageData, "pageDescription", v, formData, updateFormSection)} 
+                                />
+                              </div>
+                            </div>
+
                             {/* Hero 區域 */}
                             <div className="bg-white p-4 rounded-lg">
                               <h4 className="font-medium text-gray-700 mb-3">Hero 區域</h4>
                               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <FormInput 
-                                  label="頁面標題" 
+                                  label="Hero 標題" 
                                   value={pageData.hero?.title || ""} 
                                   onChange={(v: string) => updateServicePageSection(pageType.key, pageData, "hero", { ...pageData.hero, title: v }, formData, updateFormSection)} 
                                 />
@@ -716,6 +733,11 @@ export default function ContentPage() {
                                   label="CTA 按鈕文字" 
                                   value={pageData.cta?.buttonText || ""} 
                                   onChange={(v: string) => updateServicePageSection(pageType.key, pageData, "cta", { ...pageData.cta, buttonText: v }, formData, updateFormSection)} 
+                                />
+                                <FormInput 
+                                  label="CTA 按鈕連結" 
+                                  value={pageData.cta?.buttonLink || ""} 
+                                  onChange={(v: string) => updateServicePageSection(pageType.key, pageData, "cta", { ...pageData.cta, buttonLink: v }, formData, updateFormSection)} 
                                 />
                                 <FormTextarea 
                                   label="CTA 描述" 
